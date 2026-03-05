@@ -3,12 +3,11 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { usePortfolioData } from '@/lib/data';
-import { Navbar, Footer } from '@/components/Navigation';
+import { Navbar, Footer, SocialSidebar } from '@/components/Navigation';
 import { Hero, Overview, Capabilities, Developments, Research, Contact } from '@/components/PortfolioSections';
 import { Admin } from '@/components/Admin';
 import { SystemLogs } from '@/components/SystemLogs';
 import { SplashScreen } from '@/components/SplashScreen';
-import { GridBackground } from '@/components/GridBackground';
 import { Settings } from 'lucide-react';
 
 export default function Home() {
@@ -22,8 +21,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[var(--bg-color)] selection:bg-[var(--accent-blue)] selection:text-black transition-colors scanline crt-flicker">
-      <GridBackground />
       <Navbar data={data} />
+      <SocialSidebar data={data} />
       
       <Hero data={data} />
       <Overview data={data} />
