@@ -6,24 +6,25 @@
 }
 
 :root {
-  --bg-color: #f8f9fa;
-  --text-primary: #1a1a1a;
-  --text-secondary: rgba(0, 0, 0, 0.4);
-  --accent-blue: #0047ab;
-  --grid-color: rgba(0, 0, 0, 0.03);
-  --border-color: rgba(0, 0, 0, 0.05);
-  --card-bg: transparent;
+  --bg-color: #e5e5e5;
+  --text-primary: #000000;
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --accent-blue: #2563eb;
+  --accent-red: #dc2626;
+  --grid-color: rgba(0, 0, 0, 0.08);
+  --border-color: rgba(0, 0, 0, 0.15);
+  --card-bg: rgba(255, 255, 255, 0.5);
 }
 
 .dark {
   --bg-color: #050505;
   --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.4);
-  --accent-blue: #00ffff;
-  --accent-red: #ff0055;
-  --grid-color: rgba(0, 255, 255, 0.05);
-  --border-color: rgba(0, 255, 255, 0.1);
-  --card-bg: rgba(0, 255, 255, 0.02);
+  --text-secondary: rgba(255, 255, 255, 0.5);
+  --accent-blue: #00f2ff;
+  --accent-red: #ff2d55;
+  --grid-color: rgba(0, 242, 255, 0.05);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.02);
 }
 
 body {

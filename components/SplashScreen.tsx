@@ -60,7 +60,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
       initial={{ opacity: 1 }}
       animate={{ opacity: isExiting ? 0 : 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed inset-0 flex flex-col items-center justify-center bg-[#050505] z-[100] p-6 overflow-hidden"
+      className="fixed inset-0 flex flex-col items-center justify-center bg-[var(--bg-color)] z-[100] p-6 overflow-hidden"
     >
       {/* Matrix-like background effect */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
@@ -70,12 +70,12 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
       <div className="max-w-md w-full mono text-[10px] space-y-6 text-[var(--accent-blue)] relative z-10">
         <div className="flex justify-between items-end border-b border-[var(--accent-blue)]/20 pb-2">
           <div className="space-y-1">
-            <div className="text-xs font-bold tracking-widest">VAISHNAV_OS_V1.0</div>
-            <div className="opacity-50">BOOT_SEQUENCE_IN_PROGRESS</div>
+            <div className="text-xs font-bold tracking-widest text-[var(--text-primary)]">VAISHNAV_OS_V1.0</div>
+            <div className="opacity-50 text-[var(--text-secondary)]">BOOT_SEQUENCE_IN_PROGRESS</div>
           </div>
           <div className="text-right">
-            <div className="text-xl font-black leading-none">{Math.round(progress)}%</div>
-            <div className="text-[8px] opacity-50">SYSTEM_LOAD</div>
+            <div className="text-xl font-black leading-none text-[var(--text-primary)]">{Math.round(progress)}%</div>
+            <div className="text-[8px] opacity-50 text-[var(--text-secondary)]">SYSTEM_LOAD</div>
           </div>
         </div>
 

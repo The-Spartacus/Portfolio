@@ -35,6 +35,7 @@ export interface PortfolioData {
   heroTag: string;
   roles: string[];
   heroDescription: string;
+  portraitUrl: string;
   philosophy: {
     title: string;
     content: string;
@@ -55,13 +56,14 @@ export interface PortfolioData {
 const INITIAL_DATA: PortfolioData = {
   name: "VAISHNAV",
   version: "v1.0",
-  status: "ONLINE",
-  heroTag: "Persuing_MCA",
+  status: "ACTIVE_AND_AVAILABLE",
+  heroTag: "DESIGNER / DEVELOPER",
   roles: ["AI_ENTHUSIAST", "CYBER_RESEARCHER", "FULLSTACK_DEV"],
-  heroDescription: "Engineering high-integrity intelligent systems. Specializing in the synthesis of adversarial machine learning and proactive digital defense.",
+  heroDescription: "A designer/developer specialized in high-integrity intelligent systems, bridging the gap between neural logic and seamless user experience.",
+  portraitUrl: "https://picsum.photos/seed/portrait/800/1000",
   philosophy: {
     title: "Core Philosophy",
-    content: "Developing at the intersection of AI_LOGIC and SEC_ARCH. My focus is on creating autonomous systems that are both highly intelligent and resilient to malicious influence.",
+    content: "Developing at the intersection of AI_LOGIC and SEC_ARCH. My focus is on creating systems that are both highly intelligent and resilient.",
     subContent: "Leveraging academic rigor to solve real-world engineering challenges. I bridge the technical gap between abstract neural architectures and high-performance production code.",
     specs: [
       { label: "SPEC_01", value: "CS_GRAD" },

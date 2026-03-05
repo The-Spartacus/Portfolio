@@ -1,9 +1,10 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { PortfolioData, TechStack, Project, ResearchDoc } from '@/lib/data';
-import { Save, Plus, Trash2, X } from 'lucide-react';
+import { Save, Plus, Trash2, X, LogOut } from 'lucide-react';
+import { Login } from './Login';
 
 interface AdminProps {
   data: PortfolioData;
@@ -12,6 +13,8 @@ interface AdminProps {
 }
 
 export const Admin = ({ data, onSave, onClose }: AdminProps) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const { register, control, handleSubmit, watch } = useForm<PortfolioData>({
     defaultValues: data
   });
@@ -31,6 +34,10 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
     name: "researchDocs"
   });
 
+  if (!isLoggedIn) {
+    return <Login onLogin={() => setIsLoggedIn(true)} onClose={onClose} />;
+  }
+
   const onSubmit = (formData: PortfolioData) => {
     onSave(formData);
     onClose();
@@ -45,6 +52,13 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
             <p className="mono text-[10px] text-[var(--text-secondary)]">Modify system parameters and content</p>
           </div>
           <div className="flex gap-4 w-full md:w-auto">
+            <button 
+              onClick={() => setIsLoggedIn(false)}
+              className="px-4 py-2 border border-red-500/30 mono text-[10px] font-bold text-red-500 hover:bg-red-500/10 transition-all flex items-center justify-center gap-2"
+              title="Logout"
+            >
+              <LogOut size={14} /> LOGOUT
+            </button>
             <button 
               onClick={onClose}
               className="flex-1 md:flex-none px-4 py-2 border border-[var(--border-color)] mono text-[10px] font-bold text-[var(--text-secondary)] hover:bg-[var(--text-primary)]/5 transition-all flex items-center justify-center gap-2"

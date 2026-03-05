@@ -66,9 +66,7 @@ export const BruteforceText: React.FC<BruteforceTextProps> = ({
   return (
     <span className={`${className} inline-flex items-center mono whitespace-pre`}>
       {displayText}
-      {isComplete && (
-        <span className="w-1 h-4 bg-[var(--accent-blue)] ml-1 animate-pulse" />
-      )}
+      <span className="w-[3px] h-4 bg-[var(--accent-blue)] ml-2 animate-pulse shadow-[0_0_8px_var(--accent-blue)]" />
     </span>
   );
 };
