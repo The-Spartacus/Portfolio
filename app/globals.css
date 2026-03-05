@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+:root {
+  --bg-color: #f8f9fa;
+  --text-primary: #1a1a1a;
+  --text-secondary: rgba(0, 0, 0, 0.4);
+  --accent-blue: #0047ab;
+  --grid-color: rgba(0, 0, 0, 0.03);
+  --border-color: rgba(0, 0, 0, 0.05);
+  --card-bg: transparent;
+}
+
+.dark {
+  --bg-color: #050505;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.4);
+  --accent-blue: #00ffff;
+  --accent-red: #ff0055;
+  --grid-color: rgba(0, 255, 255, 0.05);
+  --border-color: rgba(0, 255, 255, 0.1);
+  --card-bg: rgba(0, 255, 255, 0.02);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.95; }
+  20% { opacity: 0.98; }
+  25% { opacity: 0.95; }
+  30% { opacity: 0.9; }
+  35% { opacity: 0.95; }
+  40% { opacity: 0.98; }
+  45% { opacity: 0.95; }
+  50% { opacity: 0.9; }
+  55% { opacity: 0.95; }
+  60% { opacity: 0.98; }
+  65% { opacity: 0.95; }
+  70% { opacity: 0.9; }
+  75% { opacity: 0.95; }
+  80% { opacity: 0.98; }
+  85% { opacity: 0.95; }
+  90% { opacity: 0.9; }
+  95% { opacity: 0.95; }
+  100% { opacity: 0.98; }
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(-5px, -5px);
+  }
+  10% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translate(5px, 5px);
+  }
+  20% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(-5px, 5px);
+  }
+  30% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: inset(50% 0 30% 0);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: inset(40% 0 43% 0);
+    transform: translate(5px, 5px);
+  }
+  70% {
+    clip-path: inset(80% 0 0 0);
+    transform: translate(-5px, 5px);
+  }
+  80% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translate(0px, 5px);
+  }
+  90% {
+    clip-path: inset(50% 0 30% 0);
+    transform: translate(-5px, 0px);
+  }
+  100% {
+    clip-path: inset(10% 0 85% 0);
+    transform: translate(5px, 0px);
+  }
+}
+
+.scanline::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--accent-blue) 50%,
+    transparent 100%
+  );
+  opacity: 0.03;
+  pointer-events: none;
+  animation: scanline 10s linear infinite;
+  z-index: 50;
+  display: none;
+}
+
+.dark .scanline::after {
+  display: block;
+}
+
+.crt-flicker {
+  animation: none;
+}
+
+.dark .crt-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+.glitch-container {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-color);
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--accent-red);
+  clip-path: inset(0 0 0 0);
+  animation: glitch 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--accent-blue);
+  clip-path: inset(0 0 0 0);
+  animation: glitch 3s infinite linear alternate-reverse;
+}
+
+.dark .glow {
+  box-shadow: 0 0 15px var(--accent-blue);
+}
+
+.dark .glow-text {
+  text-shadow: 0 0 8px var(--accent-blue);
+}
+
+.terminal-window {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
+}
+
+.dark .terminal-window {
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-blue);
+  opacity: 0.5;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
