@@ -167,14 +167,6 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)]">Featured_Developments</h2>
         </div>
-        <a 
-          href={data.socials.github} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] hover:text-[var(--text-primary)] transition-colors flex items-center gap-2 tracking-widest uppercase"
-        >
-          OPEN_REMOTE_REPOS <ExternalLink size={10} />
-        </a>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border-color)] border border-[var(--border-color)]">
@@ -188,25 +180,49 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
                   </span>
                 ))}
               </div>
-              <div className="flex gap-3">
+              <div className="flex gap-2">
                 {project.githubUrl && (
-                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors" title="GitHub">
-                    <Github size={16} />
+                  <a 
+                    href={project.githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-2 border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--accent-blue)] hover:border-[var(--accent-blue)] transition-all" 
+                    title="GitHub"
+                  >
+                    <Github size={14} />
                   </a>
                 )}
                 {project.liveUrl && (
-                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors" title="Live Demo">
-                    <ExternalLink size={16} />
+                  <a 
+                    href={project.liveUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-2 border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--accent-blue)] hover:border-[var(--accent-blue)] transition-all" 
+                    title="Live Demo"
+                  >
+                    <ExternalLink size={14} />
                   </a>
                 )}
                 {project.docsUrl && (
-                  <a href={project.docsUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors" title="Documentation">
-                    <FileText size={16} />
+                  <a 
+                    href={project.docsUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-2 border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--accent-blue)] hover:border-[var(--accent-blue)] transition-all" 
+                    title="Documentation"
+                  >
+                    <FileText size={14} />
                   </a>
                 )}
                 {project.videoUrl && (
-                  <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors" title="Video Demo">
-                    <Video size={16} />
+                  <a 
+                    href={project.videoUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-2 border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--accent-blue)] hover:border-[var(--accent-blue)] transition-all" 
+                    title="Video Demo"
+                  >
+                    <Video size={14} />
                   </a>
                 )}
               </div>

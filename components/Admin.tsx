@@ -249,7 +249,12 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                       <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Github URL</label>
                       <input 
                         type="url"
-                        {...register(`projects.${index}.githubUrl`)} 
+                        {...register(`projects.${index}.githubUrl`, {
+                          pattern: {
+                            value: /^https?:\/\/.+/,
+                            message: "Invalid URL"
+                          }
+                        })} 
                         placeholder="https://github.com/..."
                         className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" 
                       />
@@ -258,7 +263,12 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                       <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Live Demo URL</label>
                       <input 
                         type="url"
-                        {...register(`projects.${index}.liveUrl`)} 
+                        {...register(`projects.${index}.liveUrl`, {
+                          pattern: {
+                            value: /^https?:\/\/.+/,
+                            message: "Invalid URL"
+                          }
+                        })} 
                         placeholder="https://..."
                         className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" 
                       />
@@ -267,7 +277,12 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                       <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Documentation URL</label>
                       <input 
                         type="url"
-                        {...register(`projects.${index}.docsUrl`)} 
+                        {...register(`projects.${index}.docsUrl`, {
+                          pattern: {
+                            value: /^https?:\/\/.+/,
+                            message: "Invalid URL"
+                          }
+                        })} 
                         placeholder="https://docs..."
                         className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" 
                       />
@@ -276,7 +291,12 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                       <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Video Demo URL</label>
                       <input 
                         type="url"
-                        {...register(`projects.${index}.videoUrl`)} 
+                        {...register(`projects.${index}.videoUrl`, {
+                          pattern: {
+                            value: /^https?:\/\/.+/,
+                            message: "Invalid URL"
+                          }
+                        })} 
                         placeholder="https://youtube.com/..."
                         className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" 
                       />
