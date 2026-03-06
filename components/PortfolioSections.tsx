@@ -11,57 +11,68 @@ import Image from 'next/image';
 
 export const Hero = ({ data }: { data: PortfolioData }) => {
   return (
-    <section id="hero" className="min-h-screen pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 relative overflow-hidden bg-[var(--bg-color)] transition-colors">
-      <div className="flex-1 text-left z-10">
+    <section id="hero" className="min-h-screen pt-32 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center justify-center text-center relative overflow-hidden bg-[var(--bg-color)] transition-colors">
+      <div className="z-10 flex flex-col items-center">
         <div className="mono text-[10px] text-[var(--accent-blue)] mb-8 flex items-center gap-2 glow-text">
           <span className="w-1.5 h-1.5 bg-[var(--accent-blue)] glow" />
           STATUS: #{data.status}
         </div>
         
-        <h1 className="text-7xl md:text-9xl font-black tracking-tighter mb-8 text-[var(--text-primary)]">
+        <h1 className="text-7xl md:text-[12rem] font-black tracking-tighter mb-4 text-[var(--text-primary)] leading-none">
           {data.name}
         </h1>
 
-        <p className="max-w-md text-[var(--text-secondary)] leading-relaxed mb-12 text-sm">
-          {data.heroDescription}
-        </p>
+        <div className="mono text-[10px] text-[var(--text-secondary)] mb-12 flex flex-wrap justify-center gap-x-6 gap-y-4">
+          {data.roles.map((role, i) => (
+            <div key={role} className="flex items-center gap-2">
+              <span className="opacity-20">[</span>
+              <BruteforceText 
+                text={role} 
+                delay={800 + (i * 400)} 
+                className="text-[var(--text-primary)] font-bold"
+              />
+              <span className="opacity-20">]</span>
+              {i < data.roles.length - 1 && <span className="opacity-10 ml-2">|</span>}
+            </div>
+          ))}
+        </div>
 
-        <div className="flex items-center gap-6">
+        <div className="max-w-3xl mb-12 min-h-[3rem] text-center">
+          <TerminalText 
+            text={data.heroDescription}
+            delay={2000}
+            showPrompt={true}
+            className="text-[var(--text-secondary)] leading-relaxed text-sm md:text-lg"
+          />
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center gap-6">
           <a 
-            href="#contact"
-            className="bg-[var(--text-primary)] text-[var(--bg-color)] px-10 py-3 mono text-[10px] font-bold flex items-center justify-center gap-4 hover:bg-[var(--accent-blue)] hover:text-black hover:glow transition-all group"
+            href="#projects"
+            className="bg-[var(--text-primary)] text-[var(--bg-color)] px-10 py-4 mono text-[10px] font-bold flex items-center justify-center gap-4 hover:bg-[var(--accent-blue)] hover:text-black hover:glow transition-all group min-w-[200px]"
           >
-            _CONNECT <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            EXE.PROJECTS() <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </a>
           
-          <div className="flex items-center gap-4">
-            <a href={data.socials.github} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"><Github size={18} /></a>
-            <a href={data.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"><Linkedin size={18} /></a>
-            <a href={data.socials.email} className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"><Mail size={18} /></a>
-          </div>
+          <a 
+            href="#contact"
+            className="border border-[var(--border-color)] px-10 py-4 mono text-[10px] font-bold flex items-center justify-center gap-4 hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all min-w-[200px]"
+          >
+            _CONNECT
+          </a>
         </div>
       </div>
 
-      <div className="flex-1 relative">
-        <div className="relative w-full aspect-[4/5] max-w-md mx-auto">
-          {/* Decorative frames */}
-          <div className="absolute -top-4 -right-4 w-24 h-24 border-t border-r border-[var(--text-primary)]/20" />
-          <div className="absolute -bottom-4 -left-4 w-24 h-24 border-b border-l border-[var(--text-primary)]/20" />
-          
-          <div className="relative w-full h-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 border border-[var(--border-color)]">
-            <Image 
-              src={data.portraitUrl} 
-              alt={data.name}
-              fill
-              className="object-cover"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          
-          {/* Floating labels */}
-          <div className="absolute -left-12 top-1/2 -translate-y-1/2 vertical-text mono text-[8px] text-[var(--text-primary)]/40 tracking-[0.5em] uppercase">
-            {data.heroTag}
-          </div>
+      {/* Portrait as subtle background or floating element if needed, but for now keeping it centered as requested */}
+      <div className="absolute bottom-10 right-10 opacity-10 grayscale pointer-events-none hidden lg:block">
+        <div className="relative w-64 aspect-[4/5]">
+          <Image 
+            src={data.portraitUrl} 
+            alt={data.name}
+            fill
+            className="object-cover"
+            referrerPolicy="no-referrer"
+          />
         </div>
       </div>
       
