@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { Github, Linkedin, Mail, Download, Sun, Moon, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Mail, Download, Sun, Moon, Menu, X, Settings } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PortfolioData } from '@/lib/data';
 
-export const Navbar = ({ data }: { data: PortfolioData }) => {
+export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminClick: () => void }) => {
   const [isDark, setIsDark] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -31,7 +31,7 @@ export const Navbar = ({ data }: { data: PortfolioData }) => {
     }
   };
 
-  const navItems = ['ABOUT', 'SKILLS', 'PROJECTS', 'RESEARCH', 'CONTACT'];
+  const navItems = ['ABOUT', 'SKILLS', 'PROJECTS', 'RESEARCH', 'GITHUB', 'CONTACT'];
 
   return (
     <nav className="fixed top-0 left-0 w-full z-40 bg-[var(--bg-color)]/80 backdrop-blur-sm border-b border-[var(--border-color)] px-4 md:px-6 py-4 flex justify-between items-center transition-colors">
@@ -61,6 +61,16 @@ export const Navbar = ({ data }: { data: PortfolioData }) => {
           className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
         >
           {isDark ? <Sun size={14} /> : <Moon size={14} />}
+        </button>
+
+        <div className="w-px h-4 bg-[var(--border-color)] mx-1" />
+
+        <button 
+          onClick={onAdminClick}
+          className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors"
+          title="Admin Panel"
+        >
+          <Settings size={14} />
         </button>
         
         <a 

@@ -11,6 +11,8 @@ export interface Project {
   liveUrl?: string;
   docsUrl?: string;
   videoUrl?: string;
+  architecture?: { from: string; to: string; label: string }[];
+  techStackStats?: { label: string; value: number }[];
 }
 
 export interface TechStack {
@@ -35,6 +37,7 @@ export interface PortfolioData {
   roles: string[];
   heroDescription: string;
   portraitUrl: string;
+  githubUsername: string;
   philosophy: {
     title: string;
     content: string;
@@ -60,6 +63,7 @@ const INITIAL_DATA: PortfolioData = {
   roles: ["AI_ENTHUSIAST", "CYBER_RESEARCHER", "FULLSTACK_DEV"],
   heroDescription: "A designer/developer specialized in high-integrity intelligent systems, bridging the gap between neural logic and seamless user experience.",
   portraitUrl: "https://picsum.photos/seed/portrait/800/1000",
+  githubUsername: "The-Spartacus",
   philosophy: {
     title: "Core Philosophy",
     content: "Developing at the intersection of AI_LOGIC and SEC_ARCH. My focus is on creating systems that are both highly intelligent and resilient.",
@@ -97,7 +101,17 @@ const INITIAL_DATA: PortfolioData = {
       description: "Detection of perturbed inputs in deep learning models using ensemble-based uncertainty estimation. Developed as a proactive defense mechanism for neural pipelines.",
       tags: ["PYTHON", "PYTORCH", "ADV_SECURITY"],
       githubUrl: "https://github.com",
-      liveUrl: "https://demo.example.com"
+      liveUrl: "https://demo.example.com",
+      techStackStats: [
+        { label: "Python", value: 85 },
+        { label: "PyTorch", value: 70 },
+        { label: "OpenCV", value: 45 }
+      ],
+      architecture: [
+        { from: "Input", to: "ViT_Model", label: "Image_Stream" },
+        { from: "ViT_Model", to: "Uncertainty_Head", label: "Features" },
+        { from: "Uncertainty_Head", to: "Output", label: "Prediction" }
+      ]
     },
     {
       id: "2",
@@ -105,7 +119,12 @@ const INITIAL_DATA: PortfolioData = {
       description: "A Go-based distributed system for monitoring internal network traffic and identifying anomalous lateral movements using eBPF hooks for high performance.",
       tags: ["GOLANG", "GRPC", "EBPF"],
       githubUrl: "https://github.com",
-      docsUrl: "https://docs.example.com"
+      docsUrl: "https://docs.example.com",
+      techStackStats: [
+        { label: "Golang", value: 90 },
+        { label: "eBPF", value: 65 },
+        { label: "gRPC", value: 50 }
+      ]
     }
   ],
   researchDocs: [

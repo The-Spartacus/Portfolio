@@ -4,8 +4,11 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { BruteforceText } from './BruteforceText';
 import { TerminalText } from './TerminalText';
-import { Code, Cpu, Shield, ArrowRight, ExternalLink, ArrowUpRight, Github, FileText, Video, Linkedin, Mail } from 'lucide-react';
+import { Code, Cpu, Shield, ArrowRight, ExternalLink, ArrowUpRight, Github, FileText, Video, Linkedin, Mail, Terminal as TerminalIcon } from 'lucide-react';
 import { PortfolioData } from '@/lib/data';
+import { ProjectVisuals } from './ProjectVisuals';
+import { Terminal } from './Terminal';
+import { GithubActivity } from './GithubActivity';
 
 import Image from 'next/image';
 
@@ -232,6 +235,11 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
             <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-8 sm:mb-10 flex-grow">
               {project.description}
             </p>
+
+            <ProjectVisuals 
+              techStackStats={project.techStackStats} 
+              architecture={project.architecture} 
+            />
             
             <div className="mt-auto pt-6 border-t border-[var(--border-color)] opacity-0 group-hover:opacity-100 transition-opacity">
               <div className="flex items-center gap-2 mono text-[8px] text-[var(--accent-blue)] font-bold tracking-widest uppercase">
@@ -272,6 +280,42 @@ export const Research = ({ data }: { data: PortfolioData }) => {
           </div>
         ))}
       </div>
+    </section>
+  );
+};
+
+export const TerminalSection = ({ data }: { data: PortfolioData }) => {
+  return (
+    <section id="terminal" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8">
+        <div>
+          <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
+            <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> INTERACTIVE_SHELL
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)]">System_Terminal</h2>
+        </div>
+      </div>
+      
+      <div className="max-w-4xl mx-auto">
+        <Terminal data={data} />
+      </div>
+    </section>
+  );
+};
+
+export const GithubSection = ({ data }: { data: PortfolioData }) => {
+  return (
+    <section id="github" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8">
+        <div>
+          <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
+            <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> OPEN_SOURCE
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)]">Github_Activity</h2>
+        </div>
+      </div>
+      
+      <GithubActivity username={data.githubUsername} />
     </section>
   );
 };

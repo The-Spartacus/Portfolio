@@ -96,6 +96,10 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                 <input {...register("heroTag")} className="w-full p-3 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
               </div>
               <div className="space-y-2">
+                <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Github.Username</label>
+                <input {...register("githubUsername")} className="w-full p-3 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
+              </div>
+              <div className="space-y-2">
                 <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">System.Roles (Comma separated)</label>
                 <input 
                   className="w-full p-3 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]"
@@ -205,7 +209,9 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                   githubUrl: "",
                   liveUrl: "",
                   docsUrl: "",
-                  videoUrl: ""
+                  videoUrl: "",
+                  techStackStats: [],
+                  architecture: []
                 })}
                 className="mono text-[8px] font-bold text-[var(--accent-blue)] hover:underline flex items-center gap-1 glow-text"
               >
@@ -301,6 +307,41 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                         className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" 
                       />
                     </div>
+                  </div>
+
+                  {/* Tech Stack Stats */}
+                  <div className="mt-4 space-y-2">
+                    <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Tech Stack Stats (Label:Value, Comma separated)</label>
+                    <input 
+                      className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]"
+                      placeholder="Python:80, React:70"
+                      defaultValue={field.techStackStats?.map(s => `${s.label}:${s.value}`).join(", ")}
+                      onChange={(e) => {
+                        const stats = e.target.value.split(",").map(s => {
+                          const [label, value] = s.split(":").map(p => p.trim());
+                          return label && value ? { label, value: parseInt(value) } : null;
+                        }).filter(Boolean);
+                        register(`projects.${index}.techStackStats`).onChange({ target: { value: stats, name: `projects.${index}.techStackStats` } });
+                      }}
+                    />
+                  </div>
+
+                  {/* Architecture */}
+                  <div className="mt-4 space-y-2">
+                    <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Architecture (From-&gt;To:Label, Comma separated)</label>
+                    <input 
+                      className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]"
+                      placeholder="Client->Server:Request, Server->DB:Query"
+                      defaultValue={field.architecture?.map(a => `${a.from}->${a.to}:${a.label}`).join(", ")}
+                      onChange={(e) => {
+                        const arch = e.target.value.split(",").map(s => {
+                          const [flow, label] = s.split(":").map(p => p.trim());
+                          const [from, to] = flow ? flow.split("->").map(p => p.trim()) : [];
+                          return from && to && label ? { from, to, label } : null;
+                        }).filter(Boolean);
+                        register(`projects.${index}.architecture`).onChange({ target: { value: arch, name: `projects.${index}.architecture` } });
+                      }}
+                    />
                   </div>
                 </div>
               ))}

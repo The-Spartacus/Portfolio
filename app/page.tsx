@@ -4,15 +4,17 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { usePortfolioData } from '@/lib/data';
 import { Navbar, Footer, SocialSidebar } from '@/components/Navigation';
-import { Hero, Overview, Capabilities, Developments, Research, Contact } from '@/components/PortfolioSections';
+import { Hero, Overview, Capabilities, Developments, Research, Contact, GithubSection } from '@/components/PortfolioSections';
 import { Admin } from '@/components/Admin';
+import { Terminal } from '@/components/Terminal';
 import { SystemLogs } from '@/components/SystemLogs';
 import { SplashScreen } from '@/components/SplashScreen';
-import { Settings } from 'lucide-react';
+import { Terminal as TerminalIcon, X } from 'lucide-react';
 
 export default function Home() {
   const { data, updateData, isLoaded } = usePortfolioData();
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isSplashComplete, setIsSplashComplete] = useState(false);
 
   if (!isLoaded || !isSplashComplete) {
@@ -21,27 +23,41 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[var(--bg-color)] selection:bg-[var(--accent-blue)] selection:text-black transition-colors scanline crt-flicker">
-      <Navbar data={data} />
+      <Navbar data={data} onAdminClick={() => setIsAdminOpen(true)} />
       <SocialSidebar data={data} />
       
       <Hero data={data} />
       <Overview data={data} />
       <Capabilities data={data} />
       <Developments data={data} />
+      <GithubSection data={data} />
       <Research data={data} />
       <Contact />
       
       <Footer data={data} />
       <SystemLogs />
 
-      {/* Admin Toggle */}
+      {/* Terminal Toggle */}
       <button 
-        onClick={() => setIsAdminOpen(true)}
+        onClick={() => setIsTerminalOpen(true)}
         className="fixed bottom-6 right-6 z-50 w-10 h-10 bg-[var(--text-primary)] text-[var(--bg-color)] rounded-full flex items-center justify-center hover:bg-[var(--accent-blue)] hover:text-black transition-all shadow-xl glow"
-        title="Open Admin Panel"
+        title="Open System Terminal"
       >
-        <Settings size={18} />
+        <TerminalIcon size={18} />
       </button>
+
+      {/* Terminal Modal */}
+      {isTerminalOpen && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="w-full max-w-4xl"
+          >
+            <Terminal data={data} onClose={() => setIsTerminalOpen(false)} />
+          </motion.div>
+        </div>
+      )}
 
       {/* Admin Modal */}
       {isAdminOpen && (
