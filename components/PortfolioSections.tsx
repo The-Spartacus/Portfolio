@@ -21,9 +21,13 @@ export const Hero = ({ data }: { data: PortfolioData }) => {
           STATUS: #{data.status}
         </div>
         
-        <h1 className="text-5xl sm:text-7xl md:text-[10rem] lg:text-[12rem] font-black tracking-tighter mb-6 text-[var(--text-primary)] leading-[0.8] break-all">
+        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-2 text-[var(--text-primary)] leading-[0.8]">
           {data.name}
         </h1>
+        
+        <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--accent-blue)] mb-8 tracking-widest uppercase glow-text">
+          {data.heroTag}
+        </div>
 
         <div className="mono text-[9px] sm:text-[10px] text-[var(--text-secondary)] mb-10 sm:mb-12 flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-3 px-2">
           {data.roles.map((role, i) => (
@@ -54,34 +58,36 @@ export const Hero = ({ data }: { data: PortfolioData }) => {
             href="#projects"
             className="w-full sm:w-auto bg-[var(--text-primary)] text-[var(--bg-color)] px-8 sm:px-10 py-4 mono text-[10px] font-bold flex items-center justify-center gap-4 hover:bg-[var(--accent-blue)] hover:text-black hover:glow transition-all group min-w-[180px] sm:min-w-[200px]"
           >
-            EXE.PROJECTS() <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            EXE.VIEW_PROJECTS() <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
           </a>
           
           <a 
             href="#contact"
             className="w-full sm:w-auto border border-[var(--border-color)] px-8 sm:px-10 py-4 mono text-[10px] font-bold flex items-center justify-center gap-4 hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all min-w-[180px] sm:min-w-[200px]"
           >
-            _CONNECT
+            _INITIALIZE_CONTACT
           </a>
         </div>
       </div>
+    </section>
+  );
+};
 
-      {/* Portrait as subtle background or floating element if needed, but for now keeping it centered as requested */}
-      <div className="absolute bottom-10 right-10 opacity-10 grayscale pointer-events-none hidden lg:block">
-        <div className="relative w-64 aspect-[4/5]">
-          <Image 
-            src={data.portraitUrl} 
-            alt={data.name}
-            fill
-            className="object-cover"
-            referrerPolicy="no-referrer"
-          />
+export const SystemStatus = ({ data }: { data: PortfolioData }) => {
+  return (
+    <section className="py-12 border-y border-[var(--border-color)] bg-[var(--text-primary)]/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {data.stats.map((stat, i) => (
+            <div key={stat.label} className="flex flex-col items-center md:items-start">
+              <div className="mono text-[8px] text-[var(--text-secondary)] mb-1 uppercase tracking-widest">{stat.label}</div>
+              <div className="text-3xl sm:text-4xl font-black text-[var(--text-primary)] glow-text">
+                {stat.value}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-      
-      {/* Background decoration */}
-      <div className="absolute top-1/4 right-1/4 w-64 h-64 border border-[var(--text-primary)]/5 rotate-45 pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/4 w-48 h-48 border border-[var(--text-primary)]/5 -rotate-12 pointer-events-none" />
     </section>
   );
 };
@@ -92,7 +98,7 @@ export const Overview = ({ data }: { data: PortfolioData }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-16 md:mb-20">
         <div className="lg:col-span-4">
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
-            <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> OVERVIEW
+            <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> MISSION
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] leading-none">
             {data.philosophy.title}
@@ -103,7 +109,7 @@ export const Overview = ({ data }: { data: PortfolioData }) => {
         <div className="lg:col-span-8 flex flex-col justify-end">
           <p className="text-lg sm:text-xl md:text-2xl text-[var(--text-primary)] font-medium leading-tight mb-6 sm:mb-8">
             {data.philosophy.content.split(' ').map((word, i) => (
-              <span key={i} className={word.includes('_') ? 'text-[var(--accent-blue)]' : ''}>
+              <span key={i} className={word.includes('_') || ['AI', 'Security', 'Deepfake', 'Detection', 'Defense'].includes(word.replace(/[,.]/g, '')) ? 'text-[var(--accent-blue)]' : ''}>
                 {word}{' '}
               </span>
             ))}
@@ -134,7 +140,7 @@ export const Capabilities = ({ data }: { data: PortfolioData }) => {
       <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
         <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> CAPABILITIES
       </div>
-      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-12 sm:mb-16 text-[var(--text-primary)]">Technical_Stack.json</h2>
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-12 sm:mb-16 text-[var(--text-primary)] uppercase">TECH_STACK.JSON</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1">
         {data.techStacks.map((stack, i) => (
@@ -172,9 +178,9 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border-color)] border border-[var(--border-color)]">
-        {data.projects.map(project => (
-          <div key={project.id} className="p-8 sm:p-10 bg-[var(--bg-color)] hover:bg-[var(--text-primary)]/5 transition-all flex flex-col group">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-color)] border border-[var(--border-color)]">
+        {data.projects.map((project, i) => (
+          <div key={project.id} className={`p-8 sm:p-10 bg-[var(--bg-color)] hover:bg-[var(--text-primary)]/5 transition-all flex flex-col group ${i === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}>
             <div className="flex justify-between items-start mb-6 sm:mb-8">
               <div className="flex flex-wrap gap-2">
                 {project.tags.map(tag => (
@@ -206,32 +212,10 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
                     <ExternalLink size={14} />
                   </a>
                 )}
-                {project.docsUrl && (
-                  <a 
-                    href={project.docsUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="p-2 border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--accent-blue)] hover:border-[var(--accent-blue)] transition-all" 
-                    title="Documentation"
-                  >
-                    <FileText size={14} />
-                  </a>
-                )}
-                {project.videoUrl && (
-                  <a 
-                    href={project.videoUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="p-2 border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--accent-blue)] hover:border-[var(--accent-blue)] transition-all" 
-                    title="Video Demo"
-                  >
-                    <Video size={14} />
-                  </a>
-                )}
               </div>
             </div>
             
-            <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors">{project.title}</h3>
+            <h3 className={`font-bold mb-4 sm:mb-6 text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors ${i === 0 ? 'text-3xl sm:text-5xl' : 'text-2xl sm:text-3xl'}`}>{project.title}</h3>
             <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-8 sm:mb-10 flex-grow">
               {project.description}
             </p>
@@ -259,23 +243,24 @@ export const Research = ({ data }: { data: PortfolioData }) => {
     <section id="research" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <div className="text-center mb-12 md:mb-20">
         <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center justify-center gap-2 glow-text">
-          <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> 04. STRATEGIC_FOCUS
+          <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> STRATEGIC_RESEARCH
         </div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tighter mono text-[var(--text-primary)] uppercase">RESEARCH_DOCUMENT.MD</h2>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] uppercase">ACADEMIC_PUBLICATIONS.MD</h2>
       </div>
 
-      <div className="space-y-6 sm:space-y-8 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {data.researchDocs.map(doc => (
-          <div key={doc.id} className="flex flex-col md:flex-row gap-4 md:gap-12 group">
-            <div className="mono text-[10px] sm:text-xs text-[var(--text-primary)]/20 md:pt-8 group-hover:text-[var(--accent-blue)] transition-colors glow-text">
-              {doc.number}
+          <div key={doc.id} className="group p-8 border border-[var(--border-color)] bg-[var(--card-bg)] hover:border-[var(--accent-blue)] transition-all relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-1 h-full bg-[var(--accent-blue)]/10 group-hover:bg-[var(--accent-blue)] transition-all" />
+            <div className="mono text-[10px] text-[var(--accent-blue)] mb-4 flex items-center gap-2">
+              <FileText size={12} /> {doc.number}
             </div>
-            <div className="flex-1 p-6 sm:p-10 border border-[var(--border-color)] bg-[var(--card-bg)] relative terminal-window">
-              <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-[var(--accent-blue)]/20" />
-              <h3 className="mono text-xs sm:text-sm font-bold mb-4 sm:mb-6 text-[var(--text-primary)]">{doc.title}</h3>
-              <p className="italic text-xs sm:text-sm text-[var(--text-primary)]/60 leading-relaxed">
-                &quot;{doc.content}&quot;
-              </p>
+            <h3 className="text-xl font-bold mb-4 text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors">{doc.title}</h3>
+            <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed italic">
+              &quot;{doc.content}&quot;
+            </p>
+            <div className="mt-6 flex items-center gap-2 mono text-[8px] text-[var(--text-secondary)] uppercase tracking-widest">
+              <span className="w-1 h-1 rounded-full bg-[var(--accent-blue)]" /> PEER_REVIEWED_INTERNAL
             </div>
           </div>
         ))}

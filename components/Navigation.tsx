@@ -31,7 +31,7 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
     }
   };
 
-  const navItems = ['ABOUT', 'SKILLS', 'PROJECTS', 'RESEARCH', 'GITHUB', 'CONTACT'];
+  const navItems = ['ABOUT', 'PROJECTS', 'RESEARCH', 'SKILLS', 'GITHUB', 'CONTACT'];
 
   return (
     <nav className="fixed top-0 left-0 w-full z-40 bg-[var(--bg-color)]/80 backdrop-blur-sm border-b border-[var(--border-color)] px-4 md:px-6 py-4 flex justify-between items-center transition-colors">
@@ -171,7 +171,7 @@ export const Footer = ({ data }: { data: PortfolioData }) => {
   return (
     <footer className="px-6 py-12 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-6 bg-[var(--bg-color)] transition-colors">
       <div className="mono text-[10px] text-[var(--text-secondary)]">
-        © 2024 {data.name}.SYS // ALL_RIGHTS_RESERVED // B_0XFF
+        {data.name}_OS {data.version} {"//"} BUILT_WITH_REACT_THREE_JS {"//"} AI_SECURITY_RESEARCHER {"//"} INDIA {"//"} © 2026 {data.name}
       </div>
       <div className="flex items-center gap-6">
         <a href={data.socials.github} target="_blank" rel="noopener noreferrer" className="mono text-[10px] font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center gap-2">

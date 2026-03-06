@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { usePortfolioData } from '@/lib/data';
 import { Navbar, Footer, SocialSidebar } from '@/components/Navigation';
-import { Hero, Overview, Capabilities, Developments, Research, Contact, GithubSection } from '@/components/PortfolioSections';
+import { Hero, SystemStatus, Overview, Capabilities, Developments, Research, Contact, GithubSection } from '@/components/PortfolioSections';
 import { Admin } from '@/components/Admin';
 import { Terminal } from '@/components/Terminal';
 import { SystemLogs } from '@/components/SystemLogs';
@@ -17,6 +17,17 @@ export default function Home() {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isSplashComplete, setIsSplashComplete] = useState(false);
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === '`') {
+        e.preventDefault();
+        setIsTerminalOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   if (!isLoaded || !isSplashComplete) {
     return <SplashScreen onComplete={() => setIsSplashComplete(true)} />;
   }
@@ -27,6 +38,7 @@ export default function Home() {
       <SocialSidebar data={data} />
       
       <Hero data={data} />
+      <SystemStatus data={data} />
       <Overview data={data} />
       <Capabilities data={data} />
       <Developments data={data} />

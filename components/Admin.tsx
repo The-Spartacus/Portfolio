@@ -117,6 +117,21 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
             </div>
           </section>
 
+          {/* Stats */}
+          <section className="space-y-6">
+            <h2 className="mono text-xs font-bold text-[var(--accent-blue)] border-b border-[var(--accent-blue)]/10 pb-2 glow-text">01.5 SYSTEM_STATS</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {data.stats.map((stat, i) => (
+                <div key={i} className="space-y-2 p-4 border border-[var(--border-color)]">
+                  <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Stat_{i+1}.Label</label>
+                  <input {...register(`stats.${i}.label`)} className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-[10px] text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)] mb-2" />
+                  <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Stat_{i+1}.Value</label>
+                  <input {...register(`stats.${i}.value`)} className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-[10px] text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* Philosophy */}
           <section className="space-y-6">
             <h2 className="mono text-xs font-bold text-[var(--accent-blue)] border-b border-[var(--accent-blue)]/10 pb-2 glow-text">02. CORE_PHILOSOPHY</h2>
