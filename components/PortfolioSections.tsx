@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { BruteforceText } from './BruteforceText';
 import { TerminalText } from './TerminalText';
-import { Code, Cpu, Shield, ArrowRight, ExternalLink, ArrowUpRight, Github, FileText, Video, Linkedin, Mail, Terminal as TerminalIcon } from 'lucide-react';
+import { Code, Cpu, Shield, ArrowRight, ExternalLink, ArrowUpRight, Github, FileText, Video, Linkedin, Mail, Terminal as TerminalIcon, Download } from 'lucide-react';
 import { PortfolioData } from '@/lib/data';
 import { ProjectVisuals } from './ProjectVisuals';
 import { Terminal } from './Terminal';
@@ -21,14 +21,10 @@ export const Hero = ({ data }: { data: PortfolioData }) => {
           STATUS: #{data.status}
         </div>
         
-        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-2 text-[var(--text-primary)] leading-[0.8]">
+        <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-8 text-[var(--text-primary)] leading-[0.8]">
           {data.name}
         </h1>
         
-        <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--accent-blue)] mb-8 tracking-widest uppercase glow-text">
-          {data.heroTag}
-        </div>
-
         <div className="mono text-[9px] sm:text-[10px] text-[var(--text-secondary)] mb-10 sm:mb-12 flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-3 px-2">
           {data.roles.map((role, i) => (
             <div key={role} className="flex items-center gap-1.5 sm:gap-2">
@@ -62,10 +58,12 @@ export const Hero = ({ data }: { data: PortfolioData }) => {
           </a>
           
           <a 
-            href="#contact"
+            href={data.cvUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full sm:w-auto border border-[var(--border-color)] px-8 sm:px-10 py-4 mono text-[10px] font-bold flex items-center justify-center gap-4 hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all min-w-[180px] sm:min-w-[200px]"
           >
-            _INITIALIZE_CONTACT
+            DOWNLOAD_CV <Download size={14} />
           </a>
         </div>
       </div>

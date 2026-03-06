@@ -92,10 +92,6 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                 <input {...register("version")} className="w-full p-3 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
               </div>
               <div className="space-y-2">
-                <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Hero.Tag</label>
-                <input {...register("heroTag")} className="w-full p-3 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
-              </div>
-              <div className="space-y-2">
                 <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Github.Username</label>
                 <input {...register("githubUsername")} className="w-full p-3 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
               </div>

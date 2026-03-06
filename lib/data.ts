@@ -33,7 +33,6 @@ export interface PortfolioData {
   name: string;
   version: string;
   status: string;
-  heroTag: string;
   roles: string[];
   heroDescription: string;
   portraitUrl: string;
@@ -60,7 +59,6 @@ const INITIAL_DATA: PortfolioData = {
   name: "VAISHNAV",
   version: "v1.0",
   status: "ACTIVE_AND_AVAILABLE",
-  heroTag: "AI SECURITY ENGINEER",
   roles: ["AI_SECURITY_RESEARCHER", "FULLSTACK_DEVELOPER", "CYBER_ENGINEER"],
   heroDescription: "I build AI-powered cybersecurity tools, intelligent detection systems, and scalable full-stack applications.",
   portraitUrl: "https://picsum.photos/seed/portrait/800/1000",

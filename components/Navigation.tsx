@@ -31,7 +31,7 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
     }
   };
 
-  const navItems = ['ABOUT', 'PROJECTS', 'RESEARCH', 'SKILLS', 'GITHUB', 'CONTACT'];
+  const navItems = ['ABOUT', 'PROJECTS', 'RESEARCH', 'SKILLS', 'GITHUB'];
 
   return (
     <nav className="fixed top-0 left-0 w-full z-40 bg-[var(--bg-color)]/80 backdrop-blur-sm border-b border-[var(--border-color)] px-4 md:px-6 py-4 flex justify-between items-center transition-colors">
@@ -73,15 +73,6 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
           <Settings size={14} />
         </button>
         
-        <a 
-          href={data.cvUrl} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="hidden md:flex mono text-[10px] font-bold border border-[var(--text-primary)] px-3 py-1 hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all items-center gap-2 text-[var(--text-primary)]"
-        >
-          DOWNLOAD_CV <Download size={10} />
-        </a>
-
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="md:hidden p-2 text-[var(--text-primary)]"
@@ -114,14 +105,6 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
               <a href={data.socials.github} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"><Github size={18} /></a>
               <a href={data.socials.linkedin} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"><Linkedin size={18} /></a>
               <a href={data.socials.email} className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"><Mail size={18} /></a>
-              <a 
-                href={data.cvUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="mono text-[10px] font-bold border border-[var(--text-primary)] px-3 py-1 hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all flex items-center gap-2 text-[var(--text-primary)] ml-auto"
-              >
-                CV <Download size={10} />
-              </a>
             </div>
           </motion.div>
         )}
