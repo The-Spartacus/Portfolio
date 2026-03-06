@@ -7,7 +7,6 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
-  module: string;
   githubUrl?: string;
   liveUrl?: string;
   docsUrl?: string;
@@ -97,14 +96,16 @@ const INITIAL_DATA: PortfolioData = {
       title: "Adversarial ML Detection",
       description: "Detection of perturbed inputs in deep learning models using ensemble-based uncertainty estimation. Developed as a proactive defense mechanism for neural pipelines.",
       tags: ["PYTHON", "PYTORCH", "ADV_SECURITY"],
-      module: "RESEARCH.MODULE_01"
+      githubUrl: "https://github.com",
+      liveUrl: "https://demo.example.com"
     },
     {
       id: "2",
       title: "Zero-Trust Network Analyzer",
       description: "A Go-based distributed system for monitoring internal network traffic and identifying anomalous lateral movements using eBPF hooks for high performance.",
       tags: ["GOLANG", "GRPC", "EBPF"],
-      module: "SYSTEM.MODULE_02"
+      githubUrl: "https://github.com",
+      docsUrl: "https://docs.example.com"
     }
   ],
   researchDocs: [

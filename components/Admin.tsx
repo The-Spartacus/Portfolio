@@ -202,7 +202,6 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                   title: "New Project", 
                   description: "", 
                   tags: [], 
-                  module: "MODULE_01",
                   githubUrl: "",
                   liveUrl: "",
                   docsUrl: "",
@@ -223,14 +222,10 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
                   >
                     <Trash2 size={14} />
                   </button>
-                  <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div className="grid grid-cols-1 gap-4 mb-4">
                     <div className="space-y-2">
                       <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Title</label>
                       <input {...register(`projects.${index}.title`)} className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">Module</label>
-                      <input {...register(`projects.${index}.module`)} className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
                     </div>
                   </div>
                   <div className="space-y-2 mb-4">

@@ -180,20 +180,48 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border-color)] border border-[var(--border-color)]">
         {data.projects.map(project => (
           <div key={project.id} className="p-8 sm:p-10 bg-[var(--bg-color)] hover:bg-[var(--text-primary)]/5 transition-all flex flex-col group">
-            <div className="mono text-[8px] text-[var(--text-primary)]/40 mb-6 sm:mb-8 flex items-center gap-2 uppercase tracking-widest">
-              <span className="w-1.5 h-1.5 bg-[var(--accent-blue)] glow" /> {project.module}
+            <div className="flex justify-between items-start mb-6 sm:mb-8">
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map(tag => (
+                  <span key={tag} className="mono text-[8px] font-bold px-2 py-1 bg-[var(--text-primary)]/5 text-[var(--text-secondary)]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                {project.githubUrl && (
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors" title="GitHub">
+                    <Github size={16} />
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors" title="Live Demo">
+                    <ExternalLink size={16} />
+                  </a>
+                )}
+                {project.docsUrl && (
+                  <a href={project.docsUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors" title="Documentation">
+                    <FileText size={16} />
+                  </a>
+                )}
+                {project.videoUrl && (
+                  <a href={project.videoUrl} target="_blank" rel="noopener noreferrer" className="text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors" title="Video Demo">
+                    <Video size={16} />
+                  </a>
+                )}
+              </div>
             </div>
+            
             <h3 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors">{project.title}</h3>
             <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-8 sm:mb-10 flex-grow">
               {project.description}
             </p>
             
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map(tag => (
-                <span key={tag} className="mono text-[8px] font-bold px-2 py-1 bg-[var(--text-primary)]/5 text-[var(--text-secondary)]">
-                  {tag}
-                </span>
-              ))}
+            <div className="mt-auto pt-6 border-t border-[var(--border-color)] opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center gap-2 mono text-[8px] text-[var(--accent-blue)] font-bold tracking-widest uppercase">
+                <span className="w-1.5 h-1.5 bg-[var(--accent-blue)] glow" /> 
+                {project.liveUrl ? "SYSTEM_READY_FOR_DEPLOYMENT" : "SOURCE_CODE_AVAILABLE"}
+              </div>
             </div>
           </div>
         ))}
