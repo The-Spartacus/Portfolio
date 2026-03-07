@@ -13,7 +13,7 @@ interface TerminalProps {
 export const Terminal: React.FC<TerminalProps> = ({ data, onClose }) => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<{ type: 'input' | 'output'; content: string | React.ReactNode }[]>([
-    { type: 'output', content: 'Welcome to VAISHNAV_OS v1.0.0' },
+    { type: 'output', content: 'Welcome to VAISHNAV System v1.0' },
     { type: 'output', content: 'Type "help" to see available commands.' }
   ]);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -55,16 +55,6 @@ export const Terminal: React.FC<TerminalProps> = ({ data, onClose }) => {
         break;
       case 'contact':
         setHistory(prev => [...prev, { type: 'output', content: `Email: ${data.socials.email}\nLinkedIn: ${data.socials.linkedin}` }]);
-        break;
-      case 'sudo reveal_secret':
-        setHistory(prev => [...prev, { 
-          type: 'output', 
-          content: (
-            <div className="text-green-400 font-bold animate-pulse">
-              ACCESS_GRANTED. WELCOME_INVESTIGATOR. THE_FUTURE_IS_SECURE.
-            </div>
-          )
-        }]);
         break;
       case 'clear':
         setHistory([]);

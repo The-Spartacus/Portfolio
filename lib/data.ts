@@ -60,14 +60,14 @@ const INITIAL_DATA: PortfolioData = {
   version: "v1.0",
   status: "ACTIVE_AND_AVAILABLE",
   roles: ["AI_SECURITY_RESEARCHER", "FULLSTACK_DEVELOPER", "CYBER_ENGINEER"],
-  heroDescription: "I build AI-powered cybersecurity tools, intelligent detection systems, and scalable full-stack applications.",
-  portraitUrl: "https://picsum.photos/seed/portrait/800/1000",
+  heroDescription: "Specializing in the intersection of AI_LOGIC and SEC_ARCH to build autonomous, resilient systems against cyber threats.",
+  portraitUrl: "https://picsum.photos/seed/cyber/800/1000",
   githubUsername: "The-Spartacus",
   stats: [
-    { label: "PROJECTS_BUILT", value: "12+" },
-    { label: "RESEARCH_PROJECTS", value: "3" },
-    { label: "TECHNOLOGIES", value: "20+" },
-    { label: "GITHUB_REPOS", value: "40+" }
+    { label: "PROJECTS_BUILT", value: "15+" },
+    { label: "RESEARCH_PAPERS", value: "4" },
+    { label: "TECHNOLOGIES", value: "25+" },
+    { label: "GITHUB_REPOS", value: "50+" }
   ],
   philosophy: {
     title: "Core Philosophy",
@@ -76,27 +76,27 @@ const INITIAL_DATA: PortfolioData = {
     specs: [
       { label: "SPEC_01", value: "CS_GRAD" },
       { label: "SPEC_02", value: "AI.ML" },
-      { label: "SPEC_03", value: "CYBERSEC" }
+      { label: "SPEC_03", value: "SEC_ARCH" }
     ]
   },
   techStacks: [
     {
       id: "1",
       category: "AI / ML",
-      items: ["PYTHON", "PYTORCH", "TENSORFLOW", "OPENCV", "SCIKIT_LEARN"],
+      items: ["PYTHON", "PYTORCH", "TENSORFLOW", "OPENCV", "NLP", "TRANSFORMERS"],
       icon: "cpu"
     },
     {
       id: "2",
-      category: "WEB_DEV",
-      items: ["REACT", "NODE.JS", "MONGODB", "EXPRESS", "TYPESCRIPT", "NEXT.JS"],
-      icon: "code"
+      category: "SEC_ARCH",
+      items: ["WIRESHARK", "LINUX", "NMAP", "METASPLOIT", "CRYPTOGRAPHY", "EBPF"],
+      icon: "shield"
     },
     {
       id: "3",
-      category: "SECURITY",
-      items: ["WIRESHARK", "LINUX", "NMAP", "METASPLOIT", "CRYPTOGRAPHY", "EBPF"],
-      icon: "shield"
+      category: "FULLSTACK",
+      items: ["REACT", "NODE.JS", "MONGODB", "EXPRESS", "TYPESCRIPT", "NEXT.JS", "GOLANG"],
+      icon: "code"
     }
   ],
   projects: [
@@ -105,7 +105,7 @@ const INITIAL_DATA: PortfolioData = {
       title: "AI Deepfake Detection System",
       description: "Vision Transformer based system to detect manipulated media. Implements ensemble-based uncertainty estimation for proactive defense in neural pipelines.",
       tags: ["PYTHON", "PYTORCH", "COMPUTER_VISION"],
-      githubUrl: "https://github.com",
+      githubUrl: "https://github.com/The-Spartacus",
       liveUrl: "https://demo.example.com",
       techStackStats: [
         { label: "Python", value: 85 },
@@ -123,7 +123,7 @@ const INITIAL_DATA: PortfolioData = {
       title: "AI Intrusion Detection System",
       description: "Behavioral analysis using CICIDS dataset. A Go-based distributed system for monitoring internal network traffic and identifying anomalous lateral movements using eBPF hooks.",
       tags: ["GOLANG", "GRPC", "EBPF", "ML"],
-      githubUrl: "https://github.com",
+      githubUrl: "https://github.com/The-Spartacus",
       docsUrl: "https://docs.example.com",
       techStackStats: [
         { label: "Golang", value: 90 },
@@ -133,15 +133,14 @@ const INITIAL_DATA: PortfolioData = {
     },
     {
       id: "3",
-      title: "EventSphere",
-      description: "Full-stack event management platform with real-time updates and secure payment integration. Built with MERN stack for high scalability.",
-      tags: ["REACT", "NODE.JS", "MONGODB", "EXPRESS"],
-      githubUrl: "https://github.com",
-      liveUrl: "https://eventsphere.example.com",
+      title: "Autonomous Cyber Defense Bot",
+      description: "Reinforcement learning agent trained to respond to active network intrusions. Dynamically reconfigures firewall rules and isolates compromised nodes in real-time.",
+      tags: ["PYTHON", "RL", "CYBER_SECURITY"],
+      githubUrl: "https://github.com/The-Spartacus",
       techStackStats: [
-        { label: "React", value: 80 },
-        { label: "Node.js", value: 75 },
-        { label: "MongoDB", value: 60 }
+        { label: "Python", value: 80 },
+        { label: "RL", value: 75 },
+        { label: "Security", value: 60 }
       ]
     }
   ],
@@ -166,9 +165,9 @@ const INITIAL_DATA: PortfolioData = {
     }
   ],
   socials: {
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
-    email: "mailto:contact@example.com"
+    github: "https://github.com/The-Spartacus",
+    linkedin: "https://linkedin.com/in/vaishnav-ds",
+    email: "mailto:contact@vaishnav.ds"
   },
   cvUrl: "#",
 };
