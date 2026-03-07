@@ -177,24 +177,58 @@ export function usePortfolioData() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('portfolio_data');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          // eslint-disable-next-line react-hooks/set-state-in-effect
-          setData(prev => ({ ...prev, ...parsed }));
-        } catch (e) {
-          console.error("Failed to parse saved data", e);
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/portfolio');
+        if (response.ok) {
+          const fetchedData = await response.json();
+          // Remove MongoDB specific fields if they exist
+          const { _id, __v, createdAt, updatedAt, ...cleanData } = fetchedData;
+          setData(prev => ({ ...prev, ...cleanData }));
+        } else {
+          // If 404 or other error, fallback to localStorage or INITIAL_DATA
+          const saved = localStorage.getItem('portfolio_data');
+          if (saved) {
+            setData(prev => ({ ...prev, ...JSON.parse(saved) }));
+          }
         }
+      } catch (error) {
+        console.error("Failed to fetch from API, using local fallback", error);
+        const saved = localStorage.getItem('portfolio_data');
+        if (saved) {
+          setData(prev => ({ ...prev, ...JSON.parse(saved) }));
+        }
+      } finally {
+        setIsLoaded(true);
       }
-      setIsLoaded(true);
-    }
+    };
+
+    fetchData();
   }, []);
 
-  const updateData = (newData: PortfolioData) => {
+  const updateData = async (newData: PortfolioData) => {
+    // Optimistic update
     setData(newData);
     localStorage.setItem('portfolio_data', JSON.stringify(newData));
+
+    try {
+      const response = await fetch('/api/portfolio', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newData),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to save to database');
+      }
+      
+      const savedData = await response.json();
+      const { _id, __v, createdAt, updatedAt, ...cleanData } = savedData;
+      setData(cleanData);
+    } catch (error) {
+      console.error("Failed to update via API", error);
+      // We still have it in localStorage and state, but maybe show a toast in a real app
+    }
   };
 
   return { data, updateData, isLoaded };
