@@ -32,8 +32,8 @@ export const SystemLogs = () => {
   }, []);
 
   return (
-    <div className="fixed bottom-4 left-4 z-10 hidden lg:dark:block pointer-events-none">
-      <div className="mono text-[8px] text-[var(--accent-blue)]/30 space-y-1">
+    <div className="fixed bottom-6 left-6 z-30 hidden lg:dark:block pointer-events-none">
+      <div className="mono text-[8px] text-[var(--accent-blue)]/40 space-y-1">
         <AnimatePresence mode="popLayout">
           {logs.map((log, i) => (
             <motion.div

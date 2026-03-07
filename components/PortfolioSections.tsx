@@ -117,17 +117,17 @@ export const Overview = ({ data }: { data: PortfolioData }) => {
         transition={{ duration: 0.8 }}
         className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-16 md:mb-20"
       >
-        <div className="lg:col-span-5 overflow-hidden">
+        <div className="lg:col-span-4">
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
             <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> MISSION
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-7xl font-bold tracking-tighter text-[var(--text-primary)] leading-tight break-words">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] leading-none">
             {data.philosophy.title}
           </h2>
           <div className="w-12 h-1 bg-[var(--accent-blue)] mt-4 sm:mt-6 glow" />
         </div>
         
-        <div className="lg:col-span-7 flex flex-col justify-end">
+        <div className="lg:col-span-8 flex flex-col justify-end">
           <p className="text-lg sm:text-xl md:text-2xl text-[var(--text-primary)] font-medium leading-tight mb-6 sm:mb-8">
             {data.philosophy.content.split(' ').map((word, i) => (
               <span key={i} className={word.includes('_') || ['AI', 'Security', 'Deepfake', 'Detection', 'Defense'].includes(word.replace(/[,.]/g, '')) ? 'text-[var(--accent-blue)]' : ''}>
@@ -221,7 +221,7 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
             <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> DEPLOYMENT
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] break-words">FEATURED_DEVELOPMENTS</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)]">Featured_Developments</h2>
         </div>
       </motion.div>
 
@@ -304,7 +304,7 @@ export const Research = ({ data }: { data: PortfolioData }) => {
         <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center justify-center gap-2 glow-text">
           <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> STRATEGIC_RESEARCH
         </div>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] uppercase break-words">ACADEMIC_PUBLICATIONS</h2>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] uppercase">ACADEMIC_PUBLICATIONS.MD</h2>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -337,7 +337,7 @@ export const Research = ({ data }: { data: PortfolioData }) => {
 
 export const TerminalSection = ({ data }: { data: PortfolioData }) => {
   return (
-    <section id="terminal" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors max-md:translate-x-[100vw]">
+    <section id="terminal" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -348,7 +348,7 @@ export const TerminalSection = ({ data }: { data: PortfolioData }) => {
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
             <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> INTERACTIVE_SHELL
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] break-words">System_Terminal</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)]">System_Terminal</h2>
         </div>
       </motion.div>
       
