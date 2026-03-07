@@ -109,7 +109,7 @@ export const SystemStatus = ({ data }: { data: PortfolioData }) => {
 
 export const Overview = ({ data }: { data: PortfolioData }) => {
   return (
-    <section id="about" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
+    <section id="about" className="py-12 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -164,7 +164,7 @@ export const Overview = ({ data }: { data: PortfolioData }) => {
 
 export const Capabilities = ({ data }: { data: PortfolioData }) => {
   return (
-    <section id="skills" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
+    <section id="skills" className="py-12 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -174,7 +174,7 @@ export const Capabilities = ({ data }: { data: PortfolioData }) => {
         <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
           <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> CAPABILITIES
         </div>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-12 sm:mb-16 text-[var(--text-primary)] uppercase">TECH_STACK.JSON</h2>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-8 sm:mb-12 text-[var(--text-primary)] uppercase">TECH_STACK.JSON</h2>
       </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1">
@@ -210,12 +210,12 @@ export const Capabilities = ({ data }: { data: PortfolioData }) => {
 
 export const Developments = ({ data }: { data: PortfolioData }) => {
   return (
-    <section id="projects" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
+    <section id="projects" className="py-12 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8"
+        className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-12 gap-6 sm:gap-8"
       >
         <div>
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
@@ -294,20 +294,20 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
 
 export const Research = ({ data }: { data: PortfolioData }) => {
   return (
-    <section id="research" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
+    <section id="research" className="py-12 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-12 md:mb-20"
+        className="text-center mb-8 md:mb-12"
       >
         <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center justify-center gap-2 glow-text">
           <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> STRATEGIC_RESEARCH
         </div>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] uppercase">ACADEMIC_PUBLICATIONS.MD</h2>
+        <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] uppercase break-words">ACADEMIC_PUBLICATIONS.MD</h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto">
         {data.researchDocs.map((doc, i) => (
           <motion.div 
             key={doc.id} 
@@ -367,12 +367,12 @@ export const TerminalSection = ({ data }: { data: PortfolioData }) => {
 
 export const GithubSection = ({ data }: { data: PortfolioData }) => {
   return (
-    <section id="github" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
+    <section id="github" className="py-12 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8"
+        className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-12 gap-6 sm:gap-8"
       >
         <div>
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
@@ -410,7 +410,7 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32 px-4 sm:px-6 max-w-3xl mx-auto text-center bg-[var(--bg-color)] transition-colors">
+    <section id="contact" className="py-12 md:py-20 px-4 sm:px-6 max-w-3xl mx-auto text-center bg-[var(--bg-color)] transition-colors">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

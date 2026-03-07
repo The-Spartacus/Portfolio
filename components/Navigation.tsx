@@ -72,7 +72,7 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
 
         <button 
           onClick={onAdminClick}
-          className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors"
+          className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors max-md:fixed max-md:right-[-100px] max-md:top-24"
           title="Admin Panel"
         >
           <Settings size={14} />
