@@ -183,20 +183,30 @@ export function usePortfolioData() {
         const response = await fetch(`/api/portfolio?t=${Date.now()}`);
         if (response.ok) {
           const fetchedData = await response.json();
-          // Remove MongoDB specific fields if they exist
-          const { _id, __v, createdAt, updatedAt, ...cleanData } = fetchedData;
-          setData(prev => ({ ...prev, ...cleanData }));
-          setDbStatus('connected');
+          
+          if (fetchedData) {
+            // Remove MongoDB specific fields if they exist
+            const { _id, __v, createdAt, updatedAt, ...cleanData } = fetchedData;
+            setData(prev => ({ ...prev, ...cleanData }));
+            setDbStatus('connected');
+          } else {
+            // Connection works, but no data yet (first time)
+            setDbStatus('connected');
+            const saved = localStorage.getItem('portfolio_data');
+            if (saved) {
+              setData(prev => ({ ...prev, ...JSON.parse(saved) }));
+            }
+          }
         } else {
-          // If 404 or other error, fallback to localStorage or INITIAL_DATA
-          setDbStatus('local');
+          // Server returned an error (e.g. 500)
+          setDbStatus('error');
           const saved = localStorage.getItem('portfolio_data');
           if (saved) {
             setData(prev => ({ ...prev, ...JSON.parse(saved) }));
           }
         }
       } catch (error) {
-        console.error("Failed to fetch from API, using local fallback", error);
+        console.error("Failed to fetch from API", error);
         setDbStatus('error');
         const saved = localStorage.getItem('portfolio_data');
         if (saved) {

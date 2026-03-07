@@ -10,11 +10,13 @@ export async function GET() {
     const portfolio = await Portfolio.findOne().sort({ updatedAt: -1 });
     
     if (!portfolio) {
-      return NextResponse.json({ message: 'No portfolio data found' }, { status: 404 });
+      // Return 200 with null so the frontend knows the connection is OK but data is empty
+      return NextResponse.json(null, { status: 200 });
     }
     
     return NextResponse.json(portfolio);
   } catch (error: any) {
+    console.error("Database connection error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
