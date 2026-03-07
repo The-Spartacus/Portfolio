@@ -101,7 +101,7 @@ export const GithubActivity: React.FC<GithubActivityProps> = ({ username }) => {
           <div className="mono text-xs font-bold text-[var(--text-primary)] uppercase tracking-widest">COMMIT_HISTORY_LOG</div>
         </div>
         
-        <div className="flex justify-center overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex justify-start overflow-x-auto pb-4 scrollbar-hide">
           <GitHubCalendar 
             username={username}
             blockSize={12}

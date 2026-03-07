@@ -43,7 +43,7 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
       <a href="#hero" className="flex items-center gap-2 hover:text-[var(--accent-blue)] transition-colors group">
         <div className="w-6 h-6 bg-[var(--text-primary)] group-hover:bg-[var(--accent-blue)] flex items-center justify-center text-[var(--bg-color)] text-[10px] font-bold transition-colors">V</div>
         <span className="mono text-xs font-bold tracking-tighter text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors">
-          {data.name}_OS {data.version}
+          {data.name} {data.version}
         </span>
       </a>
       
@@ -72,7 +72,7 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
 
         <button 
           onClick={onAdminClick}
-          className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors max-md:fixed max-md:right-[-100px] max-md:top-24"
+          className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors"
           title="Admin Panel"
         >
           <Settings size={14} />

@@ -294,20 +294,20 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
 
 export const Research = ({ data }: { data: PortfolioData }) => {
   return (
-    <section id="research" className="py-12 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
+    <section id="research" className="py-12 md:py-16 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-8 md:mb-12"
+        className="text-left mb-6 md:mb-10"
       >
-        <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center justify-center gap-2 glow-text">
-          <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> STRATEGIC_RESEARCH
+        <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-2 flex items-center gap-2 glow-text">
+          <span className="opacity-50">—</span> STRATEGIC_RESEARCH
         </div>
-        <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] uppercase break-words">ACADEMIC_PUBLICATIONS.MD</h2>
+        <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter text-[var(--text-primary)] uppercase break-words leading-[0.85]">ACADEMIC_PUBLICATIONS.MD</h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {data.researchDocs.map((doc, i) => (
           <motion.div 
             key={doc.id} 

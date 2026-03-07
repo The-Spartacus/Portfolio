@@ -12,7 +12,7 @@
   --accent-blue: #0047ab;
   --grid-color: rgba(0, 0, 0, 0.03);
   --border-color: rgba(0, 0, 0, 0.05);
-  --card-bg: transparent;
+  --card-bg: #ffffff;
 }
 
 .dark {
@@ -35,6 +35,7 @@ body {
   background-size: 50px 50px;
   font-family: var(--font-sans);
   transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
 }
 
 .mono {
