@@ -44,7 +44,10 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-[var(--bg-color)] overflow-y-auto p-4 md:p-8 transition-colors scanline crt-flicker">
+    <div 
+      className="fixed inset-0 z-50 bg-[var(--bg-color)] overflow-y-auto p-4 md:p-8 transition-colors scanline crt-flicker"
+      data-lenis-prevent
+    >
       <div className="max-w-4xl mx-auto terminal-window p-6 md:p-10">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b border-[var(--border-color)] pb-6 gap-6">
           <div>

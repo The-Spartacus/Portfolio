@@ -91,6 +91,7 @@ export const Terminal: React.FC<TerminalProps> = ({ data, onClose }) => {
       <div 
         ref={scrollRef}
         className="flex-1 p-6 font-mono text-xs sm:text-sm overflow-y-auto bg-black/40 backdrop-blur-md"
+        data-lenis-prevent
       >
         <AnimatePresence mode="popLayout">
           {history.map((entry, i) => (

@@ -18,6 +18,14 @@ export default function Home() {
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
   React.useEffect(() => {
+    if (isTerminalOpen || isAdminOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isTerminalOpen, isAdminOpen]);
+
+  React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === '`') {
         e.preventDefault();
