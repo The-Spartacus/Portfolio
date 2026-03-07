@@ -70,8 +70,8 @@ const INITIAL_DATA: PortfolioData = {
     { label: "GITHUB_REPOS", value: "40+" }
   ],
   philosophy: {
-    title: "Mission_Statement",
-    content: "My goal is to develop intelligent systems capable of detecting cyber threats before they cause damage. I am particularly interested in AI Security, Deepfake Detection, and Autonomous Cyber Defense.",
+    title: "Core Philosophy",
+    content: "Developing at the intersection of AI_LOGIC and SEC_ARCH. My focus is on creating autonomous systems that are both highly intelligent and resilient to malicious influence.",
     subContent: "Leveraging academic rigor to solve real-world engineering challenges. I bridge the technical gap between abstract neural architectures and high-performance production code.",
     specs: [
       { label: "SPEC_01", value: "CS_GRAD" },
