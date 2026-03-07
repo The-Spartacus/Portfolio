@@ -169,7 +169,7 @@ export const Footer = ({ data }: { data: PortfolioData }) => {
       className="px-6 py-12 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-6 bg-[var(--bg-color)] transition-colors"
     >
       <div className="mono text-[10px] text-[var(--text-secondary)]">
-        {data.name}_OS {data.version} {"//"} BUILT_WITH_REACT_THREE_JS {"//"} AI_SECURITY_RESEARCHER {"//"} INDIA {"//"} © 2026 {data.name}
+        {data.name} {data.version} {"//"} BUILT_WITH_REACT_THREE_JS {"//"} AI_SECURITY_RESEARCHER {"//"} INDIA {"//"} © 2026 {data.name}
       </div>
       <div className="flex items-center gap-6">
         <a href={data.socials.github} target="_blank" rel="noopener noreferrer" className="mono text-[10px] font-bold text-[var(--text-secondary)] hover:text-[var(--text-primary)] flex items-center gap-2">

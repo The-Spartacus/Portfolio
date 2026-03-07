@@ -19,20 +19,28 @@ const LOG_MESSAGES = [
   "READY_FOR_USER_INPUT...",
 ];
 
-export const SystemLogs = () => {
+interface SystemLogsProps {
+  isVisible?: boolean;
+}
+
+export const SystemLogs: React.FC<SystemLogsProps> = ({ isVisible = false }) => {
   const [logs, setLogs] = useState<string[]>([]);
 
   useEffect(() => {
+    if (!isVisible) return;
+    
     const interval = setInterval(() => {
       const randomMsg = LOG_MESSAGES[Math.floor(Math.random() * LOG_MESSAGES.length)];
       setLogs(prev => [...prev.slice(-4), `[${new Date().toLocaleTimeString()}] ${randomMsg}`]);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isVisible]);
+
+  if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 z-30 hidden lg:dark:block pointer-events-none">
+    <div className="fixed bottom-6 left-6 z-30 hidden lg:block pointer-events-none">
       <div className="mono text-[8px] text-[var(--accent-blue)]/40 space-y-1">
         <AnimatePresence mode="popLayout">
           {logs.map((log, i) => (

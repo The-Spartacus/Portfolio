@@ -51,7 +51,20 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
             <h1 className="text-2xl md:text-3xl font-bold tracking-tighter text-[var(--text-primary)]">ADMIN_PANEL</h1>
             <p className="mono text-[10px] text-[var(--text-secondary)]">Modify system parameters and content</p>
           </div>
-          <div className="flex gap-4 w-full md:w-auto">
+          <div className="flex flex-wrap gap-4 w-full md:w-auto">
+            <button 
+              type="button"
+              onClick={() => {
+                if (confirm("Reset all data to code defaults? This will clear your local changes.")) {
+                  localStorage.removeItem('portfolio_data');
+                  window.location.reload();
+                }
+              }}
+              className="px-4 py-2 border border-orange-500/30 mono text-[10px] font-bold text-orange-500 hover:bg-orange-500/10 transition-all flex items-center justify-center gap-2"
+              title="Reset to Defaults"
+            >
+              RESET_TO_DEFAULTS
+            </button>
             <button 
               onClick={() => setIsLoggedIn(false)}
               className="px-4 py-2 border border-red-500/30 mono text-[10px] font-bold text-red-500 hover:bg-red-500/10 transition-all flex items-center justify-center gap-2"
