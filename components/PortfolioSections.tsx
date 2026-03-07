@@ -12,10 +12,20 @@ import { GithubActivity } from './GithubActivity';
 
 import Image from 'next/image';
 
+import { useScroll, useTransform } from 'motion/react';
+
 export const Hero = ({ data }: { data: PortfolioData }) => {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 100]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
+
   return (
     <section id="hero" className="min-h-screen pt-24 pb-16 px-4 sm:px-6 max-w-7xl mx-auto flex flex-col items-center justify-center text-center relative overflow-hidden bg-[var(--bg-color)] transition-colors">
-      <div className="z-10 flex flex-col items-center w-full">
+      <motion.div 
+        style={{ y, opacity, scale }}
+        className="z-10 flex flex-col items-center w-full"
+      >
         <div className="mono text-[9px] sm:text-[10px] text-[var(--accent-blue)] mb-6 sm:mb-8 flex items-center gap-2 glow-text">
           <span className="w-1.5 h-1.5 bg-[var(--accent-blue)] glow" />
           STATUS: #{data.status}
@@ -66,7 +76,7 @@ export const Hero = ({ data }: { data: PortfolioData }) => {
             DOWNLOAD_CV <Download size={14} />
           </a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -77,12 +87,19 @@ export const SystemStatus = ({ data }: { data: PortfolioData }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {data.stats.map((stat, i) => (
-            <div key={stat.label} className="flex flex-col items-center md:items-start">
+            <motion.div 
+              key={stat.label} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="flex flex-col items-center md:items-start"
+            >
               <div className="mono text-[8px] text-[var(--text-secondary)] mb-1 uppercase tracking-widest">{stat.label}</div>
               <div className="text-3xl sm:text-4xl font-black text-[var(--text-primary)] glow-text">
                 {stat.value}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -93,7 +110,13 @@ export const SystemStatus = ({ data }: { data: PortfolioData }) => {
 export const Overview = ({ data }: { data: PortfolioData }) => {
   return (
     <section id="about" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-16 md:mb-20">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-16 md:mb-20"
+      >
         <div className="lg:col-span-4">
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
             <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> MISSION
@@ -116,16 +139,23 @@ export const Overview = ({ data }: { data: PortfolioData }) => {
             {data.philosophy.subContent}
           </p>
         </div>
-      </div>
+      </motion.div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 pt-12 border-t border-[var(--border-color)]">
         {data.philosophy.specs.map((spec, i) => (
-          <div key={spec.label} className="group">
+          <motion.div 
+            key={spec.label} 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 + (i * 0.1) }}
+            className="group"
+          >
             <div className="mono text-[8px] text-[var(--text-secondary)] mb-2 uppercase tracking-widest">{spec.label}</div>
             <div className="mono text-xl font-bold text-[var(--text-primary)] tracking-tight group-hover:text-[var(--accent-blue)] transition-colors">
               {spec.value}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
@@ -135,14 +165,28 @@ export const Overview = ({ data }: { data: PortfolioData }) => {
 export const Capabilities = ({ data }: { data: PortfolioData }) => {
   return (
     <section id="skills" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
-      <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
-        <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> CAPABILITIES
-      </div>
-      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-12 sm:mb-16 text-[var(--text-primary)] uppercase">TECH_STACK.JSON</h2>
+      <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
+          <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> CAPABILITIES
+        </div>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-12 sm:mb-16 text-[var(--text-primary)] uppercase">TECH_STACK.JSON</h2>
+      </motion.div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1">
         {data.techStacks.map((stack, i) => (
-          <div key={stack.id} className="group p-8 sm:p-10 border border-[var(--border-color)] bg-[var(--card-bg)] hover:bg-[var(--text-primary)]/5 transition-all relative overflow-hidden">
+          <motion.div 
+            key={stack.id} 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1 }}
+            className="group p-8 sm:p-10 border border-[var(--border-color)] bg-[var(--card-bg)] hover:bg-[var(--text-primary)]/5 transition-all relative overflow-hidden"
+          >
             <div className="absolute top-0 right-0 p-4 mono text-[8px] text-[var(--text-primary)]/20">0x0{i+1}</div>
             <div className="text-[var(--accent-blue)] mb-10">
               {stack.icon === 'code' && <Code size={24} />}
@@ -157,7 +201,7 @@ export const Capabilities = ({ data }: { data: PortfolioData }) => {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
@@ -167,18 +211,30 @@ export const Capabilities = ({ data }: { data: PortfolioData }) => {
 export const Developments = ({ data }: { data: PortfolioData }) => {
   return (
     <section id="projects" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8"
+      >
         <div>
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
             <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> DEPLOYMENT
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)]">Featured_Developments</h2>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)]">FEATURED_DEVELOPMENTS</h2>
         </div>
-      </div>
+      </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border-color)] border border-[var(--border-color)]">
         {data.projects.map((project, i) => (
-          <div key={project.id} className={`p-8 sm:p-10 bg-[var(--bg-color)] hover:bg-[var(--text-primary)]/5 transition-all flex flex-col group ${i === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}>
+          <motion.div 
+            key={project.id} 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.1, duration: 0.6 }}
+            className={`p-8 sm:p-10 bg-[var(--bg-color)] hover:bg-[var(--text-primary)]/5 transition-all flex flex-col group ${i === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}
+          >
             <div className="flex justify-between items-start mb-6 sm:mb-8">
               <div className="flex flex-wrap gap-2">
                 {project.tags.map(tag => (
@@ -229,7 +285,7 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
                 {project.liveUrl ? "SYSTEM_READY_FOR_DEPLOYMENT" : "SOURCE_CODE_AVAILABLE"}
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
@@ -239,16 +295,28 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
 export const Research = ({ data }: { data: PortfolioData }) => {
   return (
     <section id="research" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
-      <div className="text-center mb-12 md:mb-20">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center mb-12 md:mb-20"
+      >
         <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center justify-center gap-2 glow-text">
           <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> STRATEGIC_RESEARCH
         </div>
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] uppercase">ACADEMIC_PUBLICATIONS.MD</h2>
-      </div>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] uppercase">ACADEMIC_PUBLICATIONS</h2>
+      </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-        {data.researchDocs.map(doc => (
-          <div key={doc.id} className="group p-8 border border-[var(--border-color)] bg-[var(--card-bg)] hover:border-[var(--accent-blue)] transition-all relative overflow-hidden">
+        {data.researchDocs.map((doc, i) => (
+          <motion.div 
+            key={doc.id} 
+            initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+            className="group p-8 border border-[var(--border-color)] bg-[var(--card-bg)] hover:border-[var(--accent-blue)] transition-all relative overflow-hidden"
+          >
             <div className="absolute top-0 left-0 w-1 h-full bg-[var(--accent-blue)]/10 group-hover:bg-[var(--accent-blue)] transition-all" />
             <div className="mono text-[10px] text-[var(--accent-blue)] mb-4 flex items-center gap-2">
               <FileText size={12} /> {doc.number}
@@ -260,7 +328,7 @@ export const Research = ({ data }: { data: PortfolioData }) => {
             <div className="mt-6 flex items-center gap-2 mono text-[8px] text-[var(--text-secondary)] uppercase tracking-widest">
               <span className="w-1 h-1 rounded-full bg-[var(--accent-blue)]" /> PEER_REVIEWED_INTERNAL
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>
@@ -269,19 +337,30 @@ export const Research = ({ data }: { data: PortfolioData }) => {
 
 export const TerminalSection = ({ data }: { data: PortfolioData }) => {
   return (
-    <section id="terminal" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8">
+    <section id="terminal" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors max-md:translate-x-[100vw]">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8"
+      >
         <div>
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
             <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> INTERACTIVE_SHELL
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)]">System_Terminal</h2>
         </div>
-      </div>
+      </motion.div>
       
-      <div className="max-w-4xl mx-auto">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.98 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="max-w-4xl mx-auto"
+      >
         <Terminal data={data} />
-      </div>
+      </motion.div>
     </section>
   );
 };
@@ -289,16 +368,28 @@ export const TerminalSection = ({ data }: { data: PortfolioData }) => {
 export const GithubSection = ({ data }: { data: PortfolioData }) => {
   return (
     <section id="github" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8"
+      >
         <div>
           <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
             <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> OPEN_SOURCE
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)]">Github_Activity</h2>
         </div>
-      </div>
+      </motion.div>
       
-      <GithubActivity username={data.githubUsername} />
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+      >
+        <GithubActivity username={data.githubUsername} />
+      </motion.div>
     </section>
   );
 };
@@ -320,52 +411,59 @@ export const Contact = () => {
 
   return (
     <section id="contact" className="py-20 md:py-32 px-4 sm:px-6 max-w-3xl mx-auto text-center bg-[var(--bg-color)] transition-colors">
-      <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center justify-center gap-2 glow-text">
-        <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> COMMUNICATION
-      </div>
-      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-4 text-[var(--text-primary)] uppercase">INITIALIZE_CONTACT</h2>
-      <p className="mono text-[8px] sm:text-[10px] text-[var(--text-primary)]/40 mb-12 sm:mb-16 uppercase tracking-[0.2em]">
-        {isSent ? "PACKET_RECEIVED_SUCCESSFULLY" : "Waiting for incoming request..."}
-      </p>
-
-      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8 text-left">
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <label className="mono text-[8px] text-[var(--text-secondary)] uppercase tracking-widest">INPUT.NAME</label>
-            <input 
-              required
-              type="text" 
-              placeholder="IDENTIFY_YOURSELF"
-              className="w-full p-3 sm:p-4 bg-transparent border-b border-[var(--border-color)] mono text-xs text-[var(--text-primary)] focus:border-[var(--accent-blue)] outline-none transition-all placeholder:text-[var(--text-primary)]/20"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="mono text-[8px] text-[var(--text-secondary)] uppercase tracking-widest">INPUT.EMAIL</label>
-            <input 
-              required
-              type="email" 
-              placeholder="COMM_CHANNEL_ADDRESS"
-              className="w-full p-3 sm:p-4 bg-transparent border-b border-[var(--border-color)] mono text-xs text-[var(--text-primary)] focus:border-[var(--accent-blue)] outline-none transition-all placeholder:text-[var(--text-primary)]/20"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="mono text-[8px] text-[var(--text-secondary)] uppercase tracking-widest">INPUT.MESSAGE</label>
-            <textarea 
-              required
-              rows={4}
-              placeholder="DESCRIBE_COLLABORATION_PARAMETERS"
-              className="w-full p-3 sm:p-4 bg-transparent border-b border-[var(--border-color)] mono text-xs text-[var(--text-primary)] focus:border-[var(--accent-blue)] outline-none transition-all resize-none placeholder:text-[var(--text-primary)]/20"
-            />
-          </div>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center justify-center gap-2 glow-text">
+          <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> COMMUNICATION
         </div>
-        <button 
-          disabled={isTransmitting}
-          className="w-full bg-[var(--accent-blue)] text-black py-4 sm:py-5 mono text-xs font-bold hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] hover:glow transition-all flex items-center justify-center gap-4 disabled:opacity-50 uppercase tracking-widest"
-        >
-          {isTransmitting ? "TRANSMITTING_PACKET..." : "SEND_PACKET"} 
-          {!isTransmitting && <ArrowRight size={16} className="rotate-[-45deg]" />}
-        </button>
-      </form>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter mb-4 text-[var(--text-primary)] uppercase">INITIALIZE_CONTACT</h2>
+        <p className="mono text-[8px] sm:text-[10px] text-[var(--text-primary)]/40 mb-12 sm:mb-16 uppercase tracking-[0.2em]">
+          {isSent ? "PACKET_RECEIVED_SUCCESSFULLY" : "Waiting for incoming request..."}
+        </p>
+
+        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8 text-left">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="mono text-[8px] text-[var(--text-secondary)] uppercase tracking-widest">INPUT.NAME</label>
+              <input 
+                required
+                type="text" 
+                placeholder="IDENTIFY_YOURSELF"
+                className="w-full p-3 sm:p-4 bg-transparent border-b border-[var(--border-color)] mono text-xs text-[var(--text-primary)] focus:border-[var(--accent-blue)] outline-none transition-all placeholder:text-[var(--text-primary)]/20"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="mono text-[8px] text-[var(--text-secondary)] uppercase tracking-widest">INPUT.EMAIL</label>
+              <input 
+                required
+                type="email" 
+                placeholder="COMM_CHANNEL_ADDRESS"
+                className="w-full p-3 sm:p-4 bg-transparent border-b border-[var(--border-color)] mono text-xs text-[var(--text-primary)] focus:border-[var(--accent-blue)] outline-none transition-all placeholder:text-[var(--text-primary)]/20"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="mono text-[8px] text-[var(--text-secondary)] uppercase tracking-widest">INPUT.MESSAGE</label>
+              <textarea 
+                required
+                rows={4}
+                placeholder="DESCRIBE_COLLABORATION_PARAMETERS"
+                className="w-full p-3 sm:p-4 bg-transparent border-b border-[var(--border-color)] mono text-xs text-[var(--text-primary)] focus:border-[var(--accent-blue)] outline-none transition-all resize-none placeholder:text-[var(--text-primary)]/20"
+              />
+            </div>
+          </div>
+          <button 
+            disabled={isTransmitting}
+            className="w-full bg-[var(--accent-blue)] text-black py-4 sm:py-5 mono text-xs font-bold hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] hover:glow transition-all flex items-center justify-center gap-4 disabled:opacity-50 uppercase tracking-widest"
+          >
+            {isTransmitting ? "TRANSMITTING_PACKET..." : "SEND_PACKET"} 
+            {!isTransmitting && <ArrowRight size={16} className="rotate-[-45deg]" />}
+          </button>
+        </form>
+      </motion.div>
     </section>
   );
 };

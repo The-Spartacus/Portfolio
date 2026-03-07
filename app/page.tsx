@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { usePortfolioData } from '@/lib/data';
-import { Navbar, Footer, SocialSidebar } from '@/components/Navigation';
-import { Hero, SystemStatus, Overview, Capabilities, Developments, Research, Contact, GithubSection } from '@/components/PortfolioSections';
+import { Navbar, Footer, SocialSidebar, FloatingSettings } from '@/components/Navigation';
+import { Hero, SystemStatus, Overview, Capabilities, Developments, Research, Contact, GithubSection, TerminalSection } from '@/components/PortfolioSections';
 import { Admin } from '@/components/Admin';
 import { Terminal } from '@/components/Terminal';
 import { SystemLogs } from '@/components/SystemLogs';
@@ -34,7 +34,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[var(--bg-color)] selection:bg-[var(--accent-blue)] selection:text-black transition-colors scanline crt-flicker">
-      <Navbar data={data} onAdminClick={() => setIsAdminOpen(true)} />
+      <Navbar data={data} />
+      <FloatingSettings onAdminClick={() => setIsAdminOpen(true)} />
       <SocialSidebar data={data} />
       
       <Hero data={data} />
@@ -44,6 +45,7 @@ export default function Home() {
       <Developments data={data} />
       <GithubSection data={data} />
       <Research data={data} />
+      <TerminalSection data={data} />
       <Contact />
       
       <Footer data={data} />

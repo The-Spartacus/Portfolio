@@ -34,7 +34,12 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
   const navItems = ['ABOUT', 'PROJECTS', 'RESEARCH', 'SKILLS', 'GITHUB'];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-40 bg-[var(--bg-color)]/80 backdrop-blur-sm border-b border-[var(--border-color)] px-4 md:px-6 py-4 flex justify-between items-center transition-colors">
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: "circOut" }}
+      className="fixed top-0 left-0 w-full z-40 bg-[var(--bg-color)]/80 backdrop-blur-sm border-b border-[var(--border-color)] px-4 md:px-6 py-4 flex justify-between items-center transition-colors"
+    >
       <a href="#hero" className="flex items-center gap-2 hover:text-[var(--accent-blue)] transition-colors group">
         <div className="w-6 h-6 bg-[var(--text-primary)] group-hover:bg-[var(--accent-blue)] flex items-center justify-center text-[var(--bg-color)] text-[10px] font-bold transition-colors">V</div>
         <span className="mono text-xs font-bold tracking-tighter text-[var(--text-primary)] group-hover:text-[var(--accent-blue)] transition-colors">
@@ -67,7 +72,7 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
 
         <button 
           onClick={onAdminClick}
-          className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors"
+          className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors max-md:fixed max-md:right-[-100px] max-md:top-24"
           title="Admin Panel"
         >
           <Settings size={14} />
@@ -109,13 +114,18 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 
 export const SocialSidebar = ({ data }: { data: PortfolioData }) => {
   return (
-    <div className="fixed top-24 left-6 z-30 hidden md:flex flex-col items-center gap-6">
+    <motion.div 
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.8, delay: 0.5, ease: "circOut" }}
+      className="fixed top-24 left-6 z-30 hidden md:flex flex-col items-center gap-6"
+    >
       <div className="w-[1px] h-12 bg-[var(--border-color)] mb-2" />
       <a 
         href={data.socials.github} 
@@ -146,13 +156,18 @@ export const SocialSidebar = ({ data }: { data: PortfolioData }) => {
       <span className="mono text-[8px] text-[var(--text-secondary)] vertical-text tracking-widest uppercase opacity-50">
         Connect_Secure
       </span>
-    </div>
+    </motion.div>
   );
 };
 
 export const Footer = ({ data }: { data: PortfolioData }) => {
   return (
-    <footer className="px-6 py-12 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-6 bg-[var(--bg-color)] transition-colors">
+    <motion.footer 
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      className="px-6 py-12 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-6 bg-[var(--bg-color)] transition-colors"
+    >
       <div className="mono text-[10px] text-[var(--text-secondary)]">
         {data.name}_OS {data.version} {"//"} BUILT_WITH_REACT_THREE_JS {"//"} AI_SECURITY_RESEARCHER {"//"} INDIA {"//"} © 2026 {data.name}
       </div>
@@ -167,6 +182,6 @@ export const Footer = ({ data }: { data: PortfolioData }) => {
           <Mail size={12} /> EMAIL
         </a>
       </div>
-    </footer>
+    </motion.footer>
   );
 };

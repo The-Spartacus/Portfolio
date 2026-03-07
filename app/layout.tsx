@@ -17,11 +17,15 @@ export const metadata: Metadata = {
   description: 'A high-integrity intelligent systems portfolio.',
 };
 
+import { SmoothScroll } from '@/components/SmoothScroll';
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body suppressHydrationWarning className="scanline">
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
