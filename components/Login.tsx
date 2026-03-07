@@ -7,9 +7,10 @@ import { Lock, User, ShieldAlert, Terminal } from 'lucide-react';
 interface LoginProps {
   onLogin: (success: boolean) => void;
   onClose: () => void;
+  dbStatus: 'connected' | 'error' | 'loading' | 'local';
 }
 
-export const Login = ({ onLogin, onClose }: LoginProps) => {
+export const Login = ({ onLogin, onClose, dbStatus }: LoginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -110,11 +111,28 @@ export const Login = ({ onLogin, onClose }: LoginProps) => {
 
         <div className="mt-8 pt-6 border-t border-[var(--border-color)] flex justify-between items-center">
           <div className="flex gap-1">
-            <div className="w-1 h-1 bg-[var(--accent-blue)] animate-pulse" />
-            <div className="w-1 h-1 bg-[var(--accent-blue)] animate-pulse delay-75" />
-            <div className="w-1 h-1 bg-[var(--accent-blue)] animate-pulse delay-150" />
+            <div className={`w-1 h-1 ${dbStatus === 'connected' ? 'bg-emerald-500 shadow-[0_0_4px_#10b981]' : 'bg-[var(--accent-blue)]'} animate-pulse`} />
+            <div className={`w-1 h-1 ${dbStatus === 'connected' ? 'bg-emerald-500 shadow-[0_0_4px_#10b981]' : 'bg-[var(--accent-blue)]'} animate-pulse delay-75`} />
+            <div className={`w-1 h-1 ${dbStatus === 'connected' ? 'bg-emerald-500 shadow-[0_0_4px_#10b981]' : 'bg-[var(--accent-blue)]'} animate-pulse delay-150`} />
           </div>
-          <span className="mono text-[8px] text-[var(--text-secondary)]">ENCRYPTION: AES-256-GCM</span>
+          <div className="flex items-center gap-2">
+            <div className={`w-1 h-1 rounded-full ${
+              dbStatus === 'connected' ? 'bg-emerald-500 shadow-[0_0_4px_#10b981]' : 
+              dbStatus === 'error' ? 'bg-red-500 shadow-[0_0_4px_#ef4444]' : 
+              dbStatus === 'loading' ? 'bg-yellow-500 animate-pulse' : 
+              'bg-gray-500'
+            }`} />
+            <span className={`mono text-[7px] font-bold ${
+              dbStatus === 'connected' ? 'text-emerald-500' : 
+              dbStatus === 'error' ? 'text-red-500' : 
+              dbStatus === 'loading' ? 'text-yellow-500' : 
+              'text-gray-500'
+            }`}>
+              DB_{dbStatus.toUpperCase()}
+            </span>
+            <span className="text-[var(--text-secondary)] text-[7px]">|</span>
+            <span className="mono text-[7px] text-[var(--text-secondary)]">ENCRYPTION: AES-256-GCM</span>
+          </div>
         </div>
       </motion.div>
     </div>

@@ -175,18 +175,21 @@ const INITIAL_DATA: PortfolioData = {
 export function usePortfolioData() {
   const [data, setData] = useState<PortfolioData>(INITIAL_DATA);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [dbStatus, setDbStatus] = useState<'connected' | 'error' | 'loading' | 'local'>('loading');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/portfolio');
+        const response = await fetch(`/api/portfolio?t=${Date.now()}`);
         if (response.ok) {
           const fetchedData = await response.json();
           // Remove MongoDB specific fields if they exist
           const { _id, __v, createdAt, updatedAt, ...cleanData } = fetchedData;
           setData(prev => ({ ...prev, ...cleanData }));
+          setDbStatus('connected');
         } else {
           // If 404 or other error, fallback to localStorage or INITIAL_DATA
+          setDbStatus('local');
           const saved = localStorage.getItem('portfolio_data');
           if (saved) {
             setData(prev => ({ ...prev, ...JSON.parse(saved) }));
@@ -194,6 +197,7 @@ export function usePortfolioData() {
         }
       } catch (error) {
         console.error("Failed to fetch from API, using local fallback", error);
+        setDbStatus('error');
         const saved = localStorage.getItem('portfolio_data');
         if (saved) {
           setData(prev => ({ ...prev, ...JSON.parse(saved) }));
@@ -225,11 +229,12 @@ export function usePortfolioData() {
       const savedData = await response.json();
       const { _id, __v, createdAt, updatedAt, ...cleanData } = savedData;
       setData(cleanData);
+      setDbStatus('connected');
     } catch (error) {
       console.error("Failed to update via API", error);
-      // We still have it in localStorage and state, but maybe show a toast in a real app
+      setDbStatus('error');
     }
   };
 
-  return { data, updateData, isLoaded };
+  return { data, updateData, isLoaded, dbStatus };
 }

@@ -10,10 +10,12 @@ interface AdminProps {
   data: PortfolioData;
   onSave: (data: PortfolioData) => void;
   onClose: () => void;
+  dbStatus: 'connected' | 'error' | 'loading' | 'local';
 }
 
-export const Admin = ({ data, onSave, onClose }: AdminProps) => {
+export const Admin = ({ data, onSave, onClose, dbStatus }: AdminProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   const { register, control, handleSubmit, watch } = useForm<PortfolioData>({
     defaultValues: data
@@ -35,12 +37,19 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
   });
 
   if (!isLoggedIn) {
-    return <Login onLogin={() => setIsLoggedIn(true)} onClose={onClose} />;
+    return <Login onLogin={() => setIsLoggedIn(true)} onClose={onClose} dbStatus={dbStatus} />;
   }
 
-  const onSubmit = (formData: PortfolioData) => {
-    onSave(formData);
-    onClose();
+  const onSubmit = async (formData: PortfolioData) => {
+    setIsSaving(true);
+    try {
+      await onSave(formData);
+      onClose();
+    } catch (error) {
+      console.error("Save failed", error);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -52,7 +61,26 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b border-[var(--border-color)] pb-6 gap-6">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold tracking-tighter text-[var(--text-primary)]">ADMIN_PANEL</h1>
-            <p className="mono text-[10px] text-[var(--text-secondary)]">Modify system parameters and content</p>
+            <div className="flex items-center gap-2 mt-1">
+              <p className="mono text-[10px] text-[var(--text-secondary)]">Modify system parameters and content</p>
+              <span className="text-[var(--text-secondary)]">|</span>
+              <div className="flex items-center gap-1.5">
+                <div className={`w-1.5 h-1.5 rounded-full ${
+                  dbStatus === 'connected' ? 'bg-emerald-500 shadow-[0_0_8px_#10b981]' : 
+                  dbStatus === 'error' ? 'bg-red-500 shadow-[0_0_8px_#ef4444]' : 
+                  dbStatus === 'loading' ? 'bg-yellow-500 animate-pulse' : 
+                  'bg-gray-500'
+                }`} />
+                <span className={`mono text-[8px] font-bold ${
+                  dbStatus === 'connected' ? 'text-emerald-500' : 
+                  dbStatus === 'error' ? 'text-red-500' : 
+                  dbStatus === 'loading' ? 'text-yellow-500' : 
+                  'text-gray-500'
+                }`}>
+                  DB_{dbStatus.toUpperCase()}
+                </span>
+              </div>
+            </div>
           </div>
           <div className="flex flex-wrap gap-4 w-full md:w-auto">
             <button 
@@ -83,9 +111,10 @@ export const Admin = ({ data, onSave, onClose }: AdminProps) => {
             </button>
             <button 
               onClick={handleSubmit(onSubmit)}
-              className="flex-1 md:flex-none px-6 py-2 bg-[var(--accent-blue)] text-black mono text-[10px] font-bold hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all flex items-center justify-center gap-2 glow"
+              disabled={isSaving}
+              className="flex-1 md:flex-none px-6 py-2 bg-[var(--accent-blue)] text-black mono text-[10px] font-bold hover:bg-[var(--text-primary)] hover:text-[var(--bg-color)] transition-all flex items-center justify-center gap-2 glow disabled:opacity-50"
             >
-              <Save size={14} /> SAVE_CHANGES
+              <Save size={14} /> {isSaving ? 'SAVING...' : 'SAVE_CHANGES'}
             </button>
           </div>
         </div>

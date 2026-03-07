@@ -13,7 +13,7 @@ import { SmoothScroll } from '@/components/SmoothScroll';
 import { Terminal as TerminalIcon, X } from 'lucide-react';
 
 export default function Home() {
-  const { data, updateData, isLoaded } = usePortfolioData();
+  const { data, updateData, isLoaded, dbStatus } = usePortfolioData();
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
 
@@ -86,6 +86,7 @@ export default function Home() {
             data={data} 
             onSave={updateData} 
             onClose={() => setIsAdminOpen(false)} 
+            dbStatus={dbStatus}
           />
         )}
       </main>
