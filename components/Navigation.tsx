@@ -67,16 +67,6 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
         >
           {isDark ? <Sun size={14} /> : <Moon size={14} />}
         </button>
-
-        <div className="w-px h-4 bg-[var(--border-color)] mx-1" />
-
-        <button 
-          onClick={onAdminClick}
-          className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-blue)] transition-colors"
-          title="Admin Panel"
-        >
-          <Settings size={14} />
-        </button>
         
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)}

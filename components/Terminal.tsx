@@ -8,9 +8,10 @@ import { PortfolioData } from '@/lib/data';
 interface TerminalProps {
   data: PortfolioData;
   onClose?: () => void;
+  onAdminLogin?: () => void;
 }
 
-export const Terminal: React.FC<TerminalProps> = ({ data, onClose }) => {
+export const Terminal: React.FC<TerminalProps> = ({ data, onClose, onAdminLogin }) => {
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<{ type: 'input' | 'output'; content: string | React.ReactNode }[]>([
     { type: 'output', content: 'Welcome to VAISHNAV System v1.0' },
@@ -33,7 +34,7 @@ export const Terminal: React.FC<TerminalProps> = ({ data, onClose }) => {
       case 'help':
         setHistory(prev => [...prev, { 
           type: 'output', 
-          content: 'Available commands: help, whoami, skills, projects, github, contact, clear' 
+          content: 'Available commands: help, whoami, skills, projects, github, contact, login, clear' 
         }]);
         break;
       case 'whoami':
@@ -58,6 +59,19 @@ export const Terminal: React.FC<TerminalProps> = ({ data, onClose }) => {
         break;
       case 'clear':
         setHistory([]);
+        break;
+      case 'login':
+      case 'admin':
+      case 'sudo':
+        if (onAdminLogin) {
+          setHistory(prev => [...prev, { type: 'output', content: 'Initiating secure login protocol...' }]);
+          setTimeout(() => {
+            onAdminLogin();
+            if (onClose) onClose();
+          }, 800);
+        } else {
+          setHistory(prev => [...prev, { type: 'output', content: 'Access denied: Admin interface not available in this context.' }]);
+        }
         break;
       case '':
         break;

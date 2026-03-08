@@ -75,7 +75,7 @@ export default function Home() {
               animate={{ scale: 1, opacity: 1 }}
               className="w-full max-w-4xl"
             >
-              <Terminal data={data} onClose={() => setIsTerminalOpen(false)} />
+              <Terminal data={data} onClose={() => setIsTerminalOpen(false)} onAdminLogin={() => setIsAdminOpen(true)} />
             </motion.div>
           </div>
         )}

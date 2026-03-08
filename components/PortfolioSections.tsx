@@ -373,7 +373,7 @@ export const Research = ({ data }: { data: PortfolioData }) => {
   );
 };
 
-export const TerminalSection = ({ data }: { data: PortfolioData }) => {
+export const TerminalSection = ({ data, onAdminLogin }: { data: PortfolioData, onAdminLogin?: () => void }) => {
   return (
     <section id="terminal" className="py-20 md:py-32 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div 
@@ -397,7 +397,7 @@ export const TerminalSection = ({ data }: { data: PortfolioData }) => {
         transition={{ duration: 0.6 }}
         className="max-w-4xl mx-auto"
       >
-        <Terminal data={data} />
+        <Terminal data={data} onAdminLogin={onAdminLogin} />
       </motion.div>
     </section>
   );
