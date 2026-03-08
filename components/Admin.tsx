@@ -11,9 +11,10 @@ interface AdminProps {
   onSave: (data: PortfolioData) => void;
   onClose: () => void;
   dbStatus: 'connected' | 'error' | 'loading' | 'local';
+  dbError: string | null;
 }
 
-export const Admin = ({ data, onSave, onClose, dbStatus }: AdminProps) => {
+export const Admin = ({ data, onSave, onClose, dbStatus, dbError }: AdminProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -37,7 +38,7 @@ export const Admin = ({ data, onSave, onClose, dbStatus }: AdminProps) => {
   });
 
   if (!isLoggedIn) {
-    return <Login onLogin={() => setIsLoggedIn(true)} onClose={onClose} dbStatus={dbStatus} />;
+    return <Login onLogin={() => setIsLoggedIn(true)} onClose={onClose} dbStatus={dbStatus} dbError={dbError} />;
   }
 
   const onSubmit = async (formData: PortfolioData) => {
@@ -80,6 +81,11 @@ export const Admin = ({ data, onSave, onClose, dbStatus }: AdminProps) => {
                   DB_{dbStatus.toUpperCase()}
                 </span>
               </div>
+              {dbStatus === 'error' && dbError && (
+                <div className="flex items-center gap-2 px-2 py-0.5 bg-red-500/10 border border-red-500/20 rounded">
+                  <span className="mono text-[7px] text-red-500 uppercase font-bold animate-pulse">ERROR: {dbError}</span>
+                </div>
+              )}
             </div>
           </div>
           <div className="flex flex-wrap gap-4 w-full md:w-auto">
@@ -170,6 +176,25 @@ export const Admin = ({ data, onSave, onClose, dbStatus }: AdminProps) => {
                   <input {...register(`stats.${i}.value`)} className="w-full p-2 border border-[var(--border-color)] bg-transparent mono text-[10px] text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
                 </div>
               ))}
+            </div>
+          </section>
+
+          {/* About */}
+          <section className="space-y-6">
+            <h2 className="mono text-xs font-bold text-[var(--accent-blue)] border-b border-[var(--accent-blue)]/10 pb-2 glow-text">02.5 ABOUT_ME</h2>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">About.Background</label>
+                <textarea {...register("about.background")} rows={4} className="w-full p-3 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
+              </div>
+              <div className="space-y-2">
+                <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">About.Interests</label>
+                <textarea {...register("about.interests")} rows={4} className="w-full p-3 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
+              </div>
+              <div className="space-y-2">
+                <label className="mono text-[8px] text-[var(--text-secondary)] uppercase">About.Goals</label>
+                <textarea {...register("about.goals")} rows={4} className="w-full p-3 border border-[var(--border-color)] bg-transparent mono text-xs text-[var(--text-primary)] outline-none focus:border-[var(--accent-blue)]" />
+              </div>
             </div>
           </section>
 
@@ -404,16 +429,16 @@ export const Admin = ({ data, onSave, onClose, dbStatus }: AdminProps) => {
             </div>
           </section>
 
-          {/* Research */}
+          {/* Blog */}
           <section className="space-y-6">
             <div className="flex justify-between items-center border-b border-[var(--accent-blue)]/10 pb-2">
-              <h2 className="mono text-xs font-bold text-[var(--accent-blue)] glow-text">05. RESEARCH</h2>
+              <h2 className="mono text-xs font-bold text-[var(--accent-blue)] glow-text">05. BLOG</h2>
               <button 
                 type="button"
-                onClick={() => appendResearch({ id: Date.now().toString(), number: "01", title: "New Research", content: "" })}
+                onClick={() => appendResearch({ id: Date.now().toString(), number: "01", title: "New Post", content: "" })}
                 className="mono text-[8px] font-bold text-[var(--accent-blue)] hover:underline flex items-center gap-1 glow-text"
               >
-                <Plus size={10} /> ADD_RESEARCH
+                <Plus size={10} /> ADD_POST
               </button>
             </div>
             <div className="grid gap-6">

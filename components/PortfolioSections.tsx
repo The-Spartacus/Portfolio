@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { BruteforceText } from './BruteforceText';
 import { TerminalText } from './TerminalText';
-import { Code, Cpu, Shield, ArrowRight, ExternalLink, ArrowUpRight, Github, FileText, Video, Linkedin, Mail, Terminal as TerminalIcon, Download } from 'lucide-react';
+import { Code, Cpu, Shield, ArrowRight, ExternalLink, ArrowUpRight, Github, FileText, Video, Linkedin, Mail, Terminal as TerminalIcon, Download, BookOpen, Target } from 'lucide-react';
 import { PortfolioData } from '@/lib/data';
 import { ProjectVisuals } from './ProjectVisuals';
 import { Terminal } from './Terminal';
@@ -91,7 +91,7 @@ export const SystemStatus = ({ data }: { data: PortfolioData }) => {
               key={stat.label} 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false }}
               transition={{ delay: i * 0.1 }}
               className="flex flex-col items-center md:items-start"
             >
@@ -108,12 +108,18 @@ export const SystemStatus = ({ data }: { data: PortfolioData }) => {
 };
 
 export const Overview = ({ data }: { data: PortfolioData }) => {
+  const about = data.about || {
+    background: "Computer Science graduate with a specialization in Cybersecurity and AI. My academic journey has been defined by rigorous research into system vulnerabilities and a passion for building resilient architectures.",
+    interests: "Deeply interested in the intersection of Artificial Intelligence and Information Security. My current focus areas include deepfake detection algorithms, adversarial machine learning, and zero-trust network architectures.",
+    goals: "To pioneer innovative security solutions that protect digital identities in an AI-driven world. I aim to bridge the gap between theoretical academic research and practical, scalable industry applications.",
+  };
+
   return (
     <section id="about" className="py-12 md:py-20 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: false, margin: "-100px" }}
         transition={{ duration: 0.8 }}
         className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-16 md:mb-20"
       >
@@ -122,7 +128,12 @@ export const Overview = ({ data }: { data: PortfolioData }) => {
             <span className="w-2 h-0.5 bg-[var(--accent-blue)] glow" /> MISSION
           </div>
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter text-[var(--text-primary)] leading-none">
-            {data.philosophy.title}
+            {data.philosophy.title.split(' ').map((word, i) => (
+              <React.Fragment key={i}>
+                {word}
+                {i !== data.philosophy.title.split(' ').length - 1 && <br />}
+              </React.Fragment>
+            ))}
           </h2>
           <div className="w-12 h-1 bg-[var(--accent-blue)] mt-4 sm:mt-6 glow" />
         </div>
@@ -142,21 +153,44 @@ export const Overview = ({ data }: { data: PortfolioData }) => {
       </motion.div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 pt-12 border-t border-[var(--border-color)]">
-        {data.philosophy.specs.map((spec, i) => (
-          <motion.div 
-            key={spec.label} 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 + (i * 0.1) }}
-            className="group"
-          >
-            <div className="mono text-[8px] text-[var(--text-secondary)] mb-2 uppercase tracking-widest">{spec.label}</div>
-            <div className="mono text-xl font-bold text-[var(--text-primary)] tracking-tight group-hover:text-[var(--accent-blue)] transition-colors">
-              {spec.value}
-            </div>
-          </motion.div>
-        ))}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ delay: 0.2 }}
+          className="group"
+        >
+          <div className="mono text-[10px] text-[var(--text-secondary)] mb-3 uppercase tracking-widest group-hover:text-[var(--accent-blue)] transition-colors">Background</div>
+          <div className="text-xs sm:text-sm text-[var(--text-primary)] leading-relaxed">
+            {about.background}
+          </div>
+        </motion.div>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ delay: 0.3 }}
+          className="group"
+        >
+          <div className="mono text-[10px] text-[var(--text-secondary)] mb-3 uppercase tracking-widest group-hover:text-[var(--accent-blue)] transition-colors">Interests</div>
+          <div className="text-xs sm:text-sm text-[var(--text-primary)] leading-relaxed">
+            {about.interests}
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
+          transition={{ delay: 0.4 }}
+          className="group"
+        >
+          <div className="mono text-[10px] text-[var(--text-secondary)] mb-3 uppercase tracking-widest group-hover:text-[var(--accent-blue)] transition-colors">Goals</div>
+          <div className="text-xs sm:text-sm text-[var(--text-primary)] leading-relaxed">
+            {about.goals}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -168,7 +202,7 @@ export const Capabilities = ({ data }: { data: PortfolioData }) => {
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         transition={{ duration: 0.6 }}
       >
         <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center gap-2 glow-text">
@@ -183,7 +217,7 @@ export const Capabilities = ({ data }: { data: PortfolioData }) => {
             key={stack.id} 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ delay: i * 0.1 }}
             className="group p-8 sm:p-10 border border-[var(--border-color)] bg-[var(--card-bg)] hover:bg-[var(--text-primary)]/5 transition-all relative overflow-hidden"
           >
@@ -214,7 +248,7 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-12 gap-6 sm:gap-8"
       >
         <div>
@@ -231,7 +265,7 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
             key={project.id} 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ delay: i * 0.1, duration: 0.6 }}
             className={`p-8 sm:p-10 bg-[var(--bg-color)] hover:bg-[var(--text-primary)]/5 transition-all flex flex-col group ${i === 0 ? 'md:col-span-2 lg:col-span-2' : ''}`}
           >
@@ -293,18 +327,22 @@ export const Developments = ({ data }: { data: PortfolioData }) => {
 };
 
 export const Research = ({ data }: { data: PortfolioData }) => {
+  if (!data.researchDocs || data.researchDocs.length === 0) {
+    return null;
+  }
+
   return (
-    <section id="research" className="py-12 md:py-16 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
+    <section id="blog" className="py-12 md:py-16 px-4 sm:px-6 max-w-7xl mx-auto bg-[var(--bg-color)] transition-colors">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         className="text-left mb-6 md:mb-10"
       >
         <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-2 flex items-center gap-2 glow-text">
-          <span className="opacity-50">—</span> STRATEGIC_RESEARCH
+          <span className="opacity-50">—</span> BLOG_POSTS
         </div>
-        <h2 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter text-[var(--text-primary)] uppercase break-words leading-[0.85]">ACADEMIC_PUBLICATIONS.MD</h2>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-[var(--text-primary)] uppercase break-words leading-[0.85]">BLOG.MD</h2>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
@@ -313,7 +351,7 @@ export const Research = ({ data }: { data: PortfolioData }) => {
             key={doc.id} 
             initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
             className="group p-8 border border-[var(--border-color)] bg-[var(--card-bg)] hover:border-[var(--accent-blue)] transition-all relative overflow-hidden"
           >
@@ -326,7 +364,7 @@ export const Research = ({ data }: { data: PortfolioData }) => {
               &quot;{doc.content}&quot;
             </p>
             <div className="mt-6 flex items-center gap-2 mono text-[8px] text-[var(--text-secondary)] uppercase tracking-widest">
-              <span className="w-1 h-1 rounded-full bg-[var(--accent-blue)]" /> PEER_REVIEWED_INTERNAL
+              <span className="w-1 h-1 rounded-full bg-[var(--accent-blue)]" /> PUBLISHED_ARTICLE
             </div>
           </motion.div>
         ))}
@@ -341,7 +379,7 @@ export const TerminalSection = ({ data }: { data: PortfolioData }) => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 gap-6 sm:gap-8"
       >
         <div>
@@ -355,7 +393,7 @@ export const TerminalSection = ({ data }: { data: PortfolioData }) => {
       <motion.div 
         initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         transition={{ duration: 0.6 }}
         className="max-w-4xl mx-auto"
       >
@@ -371,7 +409,7 @@ export const GithubSection = ({ data }: { data: PortfolioData }) => {
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-12 gap-6 sm:gap-8"
       >
         <div>
@@ -385,7 +423,7 @@ export const GithubSection = ({ data }: { data: PortfolioData }) => {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         transition={{ duration: 1 }}
       >
         <GithubActivity username={data.githubUsername} />
@@ -414,7 +452,7 @@ export const Contact = () => {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false }}
         transition={{ duration: 0.8 }}
       >
         <div className="mono text-[9px] sm:text-[10px] font-bold text-[var(--accent-blue)] mb-4 flex items-center justify-center gap-2 glow-text">

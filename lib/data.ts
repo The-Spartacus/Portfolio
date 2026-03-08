@@ -44,6 +44,11 @@ export interface PortfolioData {
     subContent: string;
     specs: { label: string; value: string }[];
   };
+  about?: {
+    background: string;
+    interests: string;
+    goals: string;
+  };
   techStacks: TechStack[];
   projects: Project[];
   researchDocs: ResearchDoc[];
@@ -78,6 +83,11 @@ const INITIAL_DATA: PortfolioData = {
       { label: "SPEC_02", value: "AI.ML" },
       { label: "SPEC_03", value: "SEC_ARCH" }
     ]
+  },
+  about: {
+    background: "Computer Science graduate with a specialization in Cybersecurity and AI. My academic journey has been defined by rigorous research into system vulnerabilities and a passion for building resilient architectures.",
+    interests: "Deeply interested in the intersection of Artificial Intelligence and Information Security. My current focus areas include deepfake detection algorithms, adversarial machine learning, and zero-trust network architectures.",
+    goals: "To pioneer innovative security solutions that protect digital identities in an AI-driven world. I aim to bridge the gap between theoretical academic research and practical, scalable industry applications.",
   },
   techStacks: [
     {
@@ -176,6 +186,7 @@ export function usePortfolioData() {
   const [data, setData] = useState<PortfolioData>(INITIAL_DATA);
   const [isLoaded, setIsLoaded] = useState(false);
   const [dbStatus, setDbStatus] = useState<'connected' | 'error' | 'loading' | 'local'>('loading');
+  const [dbError, setDbError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -189,9 +200,11 @@ export function usePortfolioData() {
             const { _id, __v, createdAt, updatedAt, ...cleanData } = fetchedData;
             setData(prev => ({ ...prev, ...cleanData }));
             setDbStatus('connected');
+            setDbError(null);
           } else {
             // Connection works, but no data yet (first time)
             setDbStatus('connected');
+            setDbError(null);
             const saved = localStorage.getItem('portfolio_data');
             if (saved) {
               setData(prev => ({ ...prev, ...JSON.parse(saved) }));
@@ -199,15 +212,18 @@ export function usePortfolioData() {
           }
         } else {
           // Server returned an error (e.g. 500)
+          const errorData = await response.json().catch(() => ({}));
           setDbStatus('error');
+          setDbError(errorData.error || "Authentication failed or connection error");
           const saved = localStorage.getItem('portfolio_data');
           if (saved) {
             setData(prev => ({ ...prev, ...JSON.parse(saved) }));
           }
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error("Failed to fetch from API", error);
         setDbStatus('error');
+        setDbError(error.message || "Network error");
         const saved = localStorage.getItem('portfolio_data');
         if (saved) {
           setData(prev => ({ ...prev, ...JSON.parse(saved) }));
@@ -246,5 +262,5 @@ export function usePortfolioData() {
     }
   };
 
-  return { data, updateData, isLoaded, dbStatus };
+  return { data, updateData, isLoaded, dbStatus, dbError };
 }

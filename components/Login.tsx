@@ -8,9 +8,10 @@ interface LoginProps {
   onLogin: (success: boolean) => void;
   onClose: () => void;
   dbStatus: 'connected' | 'error' | 'loading' | 'local';
+  dbError: string | null;
 }
 
-export const Login = ({ onLogin, onClose, dbStatus }: LoginProps) => {
+export const Login = ({ onLogin, onClose, dbStatus, dbError }: LoginProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -130,6 +131,9 @@ export const Login = ({ onLogin, onClose, dbStatus }: LoginProps) => {
             }`}>
               DB_{dbStatus.toUpperCase()}
             </span>
+            {dbStatus === 'error' && dbError && (
+              <span className="mono text-[6px] text-red-500 font-bold uppercase animate-pulse truncate max-w-[100px]">[{dbError}]</span>
+            )}
             <span className="text-[var(--text-secondary)] text-[7px]">|</span>
             <span className="mono text-[7px] text-[var(--text-secondary)]">ENCRYPTION: AES-256-GCM</span>
           </div>

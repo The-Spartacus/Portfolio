@@ -31,7 +31,7 @@ export const Navbar = ({ data, onAdminClick }: { data: PortfolioData; onAdminCli
     }
   };
 
-  const navItems = ['ABOUT', 'PROJECTS', 'RESEARCH', 'SKILLS', 'GITHUB'];
+  const navItems = ['ABOUT', 'PROJECTS', ...(data.researchDocs?.length ? ['BLOG'] : []), 'SKILLS', 'GITHUB'];
 
   return (
     <motion.nav 
@@ -165,7 +165,7 @@ export const Footer = ({ data }: { data: PortfolioData }) => {
     <motion.footer 
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
+      viewport={{ once: false }}
       className="px-6 py-12 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-6 bg-[var(--bg-color)] transition-colors"
     >
       <div className="mono text-[10px] text-[var(--text-secondary)]">
